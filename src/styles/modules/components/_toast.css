@@ -1,0 +1,117 @@
+/* ===================================
+   Toast 通知樣式
+   =================================== */
+
+.toast-container {
+    position: fixed;
+    top: 80px; /* 調整位置，避免覆蓋語言下拉選單（下拉選單高度約 60px） */
+    right: 20px;
+    z-index: 10000; /* 低於語言下拉選單 */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 280px;
+    max-width: 400px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(20, 20, 35, 0.95) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(212, 168, 83, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 168, 83, 0.1);
+    color: var(--color-text-primary);
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    pointer-events: auto;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.toast-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.toast-message {
+    flex: 1;
+    word-wrap: break-word;
+}
+
+/* 不同類型的 Toast */
+.toast-success {
+    border-color: rgba(76, 175, 80, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(76, 175, 80, 0.15);
+}
+
+.toast-success .toast-icon {
+    color: #4caf50;
+}
+
+.toast-error {
+    border-color: rgba(244, 67, 54, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(244, 67, 54, 0.15);
+}
+
+.toast-error .toast-icon {
+    color: #f44336;
+}
+
+.toast-warning {
+    border-color: rgba(255, 152, 0, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 152, 0, 0.15);
+}
+
+.toast-warning .toast-icon {
+    color: #ff9800;
+}
+
+.toast-info {
+    border-color: rgba(33, 150, 243, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(33, 150, 243, 0.15);
+}
+
+.toast-info .toast-icon {
+    color: #2196f3;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .toast-container {
+        top: 60px; /* 調整位置，避免覆蓋語言下拉選單 */
+        right: 10px;
+        left: 10px;
+    }
+
+    .toast {
+        min-width: auto;
+        max-width: 100%;
+        transform: translateY(-100px);
+    }
+
+    .toast.show {
+        transform: translateY(0);
+    }
+}
+

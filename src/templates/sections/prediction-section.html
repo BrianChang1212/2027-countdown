@@ -1,0 +1,185 @@
+<!-- Polymarket 預測市場區塊 -->
+<section class="prediction-section">
+    <div class="prediction-header">
+        <div class="prediction-header-line"></div>
+        <h2 class="prediction-title">
+            <span class="prediction-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M3.5 18.5L9.5 12.5L13.5 16.5L22 6.92L20.59 5.51L13.5 13.5L9.5 9.5L2 17L3.5 18.5Z"
+                        fill="currentColor" />
+                </svg>
+            </span>
+            <span data-i18n="predictionTitle">預測市場數據</span>
+        </h2>
+        <div class="prediction-header-line"></div>
+    </div>
+
+    <!-- 預測卡片網格 -->
+    <div class="prediction-grid">
+        <!-- 預測卡片 1: 軍事行動 -->
+        <div class="prediction-card-mini">
+            <div class="prediction-mini-header">
+                <span class="prediction-mini-badge" data-i18n="pred.military">軍事行動</span>
+                <span class="prediction-mini-year">2025</span>
+            </div>
+            <h4 class="prediction-mini-question" data-i18n="pred.q1">中國2025年武力犯台？</h4>
+            <div class="prediction-mini-result">
+                <div class="mini-bar-container">
+                    <div class="mini-bar mini-bar-no" style="width: 91%"></div>
+                </div>
+                <div class="mini-stats">
+                    <span class="mini-no"><span data-i18n="statNo">不會</span> 91%</span>
+                    <span class="mini-yes"><span data-i18n="statYes">會</span> 9%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 預測卡片 2: 封鎖台灣 -->
+        <div class="prediction-card-mini">
+            <div class="prediction-mini-header">
+                <span class="prediction-mini-badge blockade" data-i18n="pred.blockade">海上封鎖</span>
+                <span class="prediction-mini-year">2027</span>
+            </div>
+            <h4 class="prediction-mini-question" data-i18n="pred.q2">2027年前封鎖台灣？</h4>
+            <div class="prediction-mini-result">
+                <div class="mini-bar-container">
+                    <div class="mini-bar mini-bar-no" style="width: 85%"></div>
+                </div>
+                <div class="mini-stats">
+                    <span class="mini-no"><span data-i18n="statNo">不會</span> 85%</span>
+                    <span class="mini-yes"><span data-i18n="statYes">會</span> 15%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 預測卡片 3: 和平統一 -->
+        <div class="prediction-card-mini">
+            <div class="prediction-mini-header">
+                <span class="prediction-mini-badge peace" data-i18n="pred.peace">和平統一</span>
+                <span class="prediction-mini-year">2030</span>
+            </div>
+            <h4 class="prediction-mini-question" data-i18n="pred.q3">2030年前和平統一？</h4>
+            <div class="prediction-mini-result">
+                <div class="mini-bar-container">
+                    <div class="mini-bar mini-bar-no" style="width: 97%"></div>
+                </div>
+                <div class="mini-stats">
+                    <span class="mini-no"><span data-i18n="statNo">不會</span> 97%</span>
+                    <span class="mini-yes"><span data-i18n="statYes">會</span> 3%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 預測卡片 4: 美國介入 -->
+        <div class="prediction-card-mini">
+            <div class="prediction-mini-header">
+                <span class="prediction-mini-badge usa" data-i18n="pred.usIntervene">美國介入</span>
+                <span class="prediction-mini-year">2027</span>
+            </div>
+            <h4 class="prediction-mini-question" data-i18n="pred.q4">台海衝突時美國介入？</h4>
+            <div class="prediction-mini-result">
+                <div class="mini-bar-container">
+                    <div class="mini-bar mini-bar-yes" style="width: 72%"></div>
+                </div>
+                <div class="mini-stats">
+                    <span class="mini-yes highlight"><span data-i18n="statYes">會</span> 72%</span>
+                    <span class="mini-no"><span data-i18n="statNo">不會</span> 28%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="prediction-container">
+        <!-- 主要 Polymarket 卡片 -->
+        <div class="prediction-card polymarket-card">
+            <div class="prediction-card-header">
+                <div class="prediction-source">
+                    <img src="https://polymarket.com/favicon.ico" alt="Polymarket" class="source-logo"
+                        onerror="this.style.display='none'">
+                    <span>Polymarket</span>
+                </div>
+                <span class="prediction-badge" data-i18n="predictionBadge">預測市場</span>
+            </div>
+
+            <h3 class="prediction-question" data-i18n="predictionQuestion">中國是否會在近期對台灣發動軍事行動？</h3>
+
+            <div class="prediction-stats">
+                <div class="stat-item stat-no">
+                    <div class="stat-bar">
+                        <div class="stat-fill" id="polymarket-no" style="width: 91%"></div>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label" data-i18n="statNo">不會</span>
+                        <span class="stat-value" id="polymarket-no-value">~91%</span>
+                    </div>
+                </div>
+                <div class="stat-item stat-yes">
+                    <div class="stat-bar">
+                        <div class="stat-fill" id="polymarket-yes" style="width: 9%"></div>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label" data-i18n="statYes">會</span>
+                        <span class="stat-value" id="polymarket-yes-value">~9%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prediction-meta">
+                <span class="meta-item">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                        <path
+                            d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                    </svg>
+                    <span data-i18n="realTimeData">即時數據</span>
+                </span>
+                <span class="meta-item">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                    </svg>
+                    <span data-i18n="blockchainVerified">區塊鏈驗證</span>
+                </span>
+            </div>
+
+            <a href="https://polymarket.com/markets?_c=geopolitics" target="_blank"
+                rel="noopener noreferrer" class="prediction-link">
+                <span data-i18n="viewMarketData">查看完整市場數據</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path
+                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                </svg>
+            </a>
+        </div>
+
+        <!-- 說明卡片 -->
+        <div class="prediction-card info-card">
+            <h3 class="info-title" data-i18n="infoTitle">什麼是預測市場？</h3>
+            <p class="info-text" data-i18n="infoText">
+                預測市場是一種讓參與者對未來事件結果進行押注的平台。價格反映了市場對該事件發生機率的集體預期。
+            </p>
+            <ul class="info-list">
+                <li>
+                    <span class="info-icon">&#10003;</span>
+                    <span data-i18n="infoItem1">價格 = 市場預測的發生機率</span>
+                </li>
+                <li>
+                    <span class="info-icon">&#10003;</span>
+                    <span data-i18n="infoItem2">去中心化區塊鏈驗證</span>
+                </li>
+                <li>
+                    <span class="info-icon">&#10003;</span>
+                    <span data-i18n="infoItem3">反映全球投資者觀點</span>
+                </li>
+            </ul>
+            <p class="info-disclaimer" data-i18n="infoDisclaimer">
+                ※ 預測市場數據僅供參考，不代表實際發生機率
+            </p>
+            <p class="info-disclaimer region-notice" data-i18n="regionNotice">
+                ⚠️ Polymarket 在部分地區（台灣、中國、美國等）可能無法直接訪問
+            </p>
+        </div>
+    </div>
+</section>
+

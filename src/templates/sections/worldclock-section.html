@@ -1,0 +1,68 @@
+<!-- 多時區時鐘 -->
+<section class="worldclock-section">
+    <div class="worldclock-header">
+        <div class="worldclock-header-line"></div>
+        <h2 class="worldclock-title">
+            <span class="worldclock-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                    <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" />
+                </svg>
+            </span>
+            <span data-i18n="worldclock.title">全球時區</span>
+        </h2>
+        <div class="worldclock-header-line"></div>
+    </div>
+
+    <div class="worldclock-grid">
+        <div class="clock-card" data-timezone="Asia/Taipei">
+            <div class="clock-flag">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Flag_of_the_Republic_of_China.svg"
+                    alt="Taiwan" loading="lazy">
+            </div>
+            <div class="clock-info">
+                <span class="clock-city" data-i18n="worldclock.taipei">台北</span>
+                <span class="clock-time" id="clock-taipei">--:--:--</span>
+                <span class="clock-date" id="date-taipei">---</span>
+            </div>
+        </div>
+
+        <div class="clock-card" data-timezone="Asia/Shanghai">
+            <div class="clock-flag">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg"
+                    alt="China" loading="lazy">
+            </div>
+            <div class="clock-info">
+                <span class="clock-city" data-i18n="worldclock.beijing">北京</span>
+                <span class="clock-time" id="clock-beijing">--:--:--</span>
+                <span class="clock-date" id="date-beijing">---</span>
+            </div>
+        </div>
+
+        <div class="clock-card" data-timezone="America/New_York">
+            <div class="clock-flag">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg"
+                    alt="USA" loading="lazy">
+            </div>
+            <div class="clock-info">
+                <span class="clock-city" data-i18n="worldclock.washington">華盛頓</span>
+                <span class="clock-time" id="clock-washington">--:--:--</span>
+                <span class="clock-date" id="date-washington">---</span>
+            </div>
+        </div>
+
+        <div class="clock-card" data-timezone="Asia/Tokyo">
+            <div class="clock-flag">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Japan.svg"
+                    alt="Japan" loading="lazy">
+            </div>
+            <div class="clock-info">
+                <span class="clock-city" data-i18n="worldclock.tokyo">東京</span>
+                <span class="clock-time" id="clock-tokyo">--:--:--</span>
+                <span class="clock-date" id="date-tokyo">---</span>
+            </div>
+        </div>
+    </div>
+</section>
+

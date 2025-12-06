@@ -1,0 +1,244 @@
+/* ===================================
+   主內容區域樣式
+   =================================== */
+
+.main-content {
+    margin-left: 280px;
+    transition: margin-left var(--transition-normal);
+    min-height: 100vh;
+    width: calc(100% - 280px);
+    position: relative;
+    z-index: 1;
+}
+
+.sidebar.collapsed ~ .main-content {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+}
+
+.sidebar.mobile ~ .main-content {
+    margin-left: 0;
+    width: 100%;
+}
+
+/* 確保 container 在 main-content 內正確顯示 */
+.main-content .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+    box-sizing: border-box;
+}
+
+.view-container {
+    display: none;
+    animation: fadeIn 0.4s ease;
+    min-height: 100vh;
+}
+
+.view-container.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.view-header {
+    text-align: center;
+    padding: var(--spacing-lg) var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.view-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+    font-family: var(--font-display);
+}
+
+.view-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.05em;
+}
+
+/* 數據來源指示器 */
+.data-source-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+    padding: 0.5rem 1rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    justify-content: center;
+}
+
+.indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #f59e0b;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.indicator-text {
+    flex: 1;
+    text-align: center;
+}
+
+.refresh-btn {
+    padding: 0.25rem 0.5rem;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    border-radius: 6px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-normal);
+    width: 24px;
+    height: 24px;
+}
+
+.refresh-btn:hover {
+    background: rgba(212, 168, 83, 0.1);
+    border-color: rgba(212, 168, 83, 0.3);
+    color: var(--color-text-primary);
+}
+
+.refresh-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.refresh-btn.spinning svg {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===================================
+   響應式設計 - 平板和手機
+   =================================== */
+
+/* 平板版 (768px - 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .main-content {
+        margin-left: 240px;
+        width: calc(100% - 240px);
+    }
+    
+    .sidebar.collapsed ~ .main-content {
+        margin-left: 70px;
+        width: calc(100% - 70px);
+    }
+    
+    .main-content .container {
+        padding: var(--spacing-md) var(--spacing-sm);
+        max-width: 100%;
+    }
+    
+    .view-header {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+    
+    .view-title {
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+    }
+    
+    .view-subtitle {
+        font-size: 1rem;
+    }
+}
+
+/* 手機版 (最大 768px) */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding-top: 0;
+    }
+    
+    .main-content .container {
+        padding: var(--spacing-md) var(--spacing-sm);
+        max-width: 100%;
+    }
+    
+    .view-header {
+        padding: var(--spacing-md) var(--spacing-sm);
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .view-title {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .view-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .data-source-indicator {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+        margin-top: var(--spacing-sm);
+    }
+}
+
+/* 小型手機 (最大 480px) */
+@media (max-width: 480px) {
+    .main-content .container {
+        padding: var(--spacing-sm);
+    }
+    
+    .view-header {
+        padding: var(--spacing-sm);
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .view-title {
+        font-size: clamp(1.25rem, 7vw, 1.75rem);
+    }
+    
+    .view-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    .data-source-indicator {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.7rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+}
+

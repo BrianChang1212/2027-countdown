@@ -1,0 +1,449 @@
+/* ===================================
+   首頁視圖樣式
+   =================================== */
+
+/* 主容器 */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+/* 標題區域 */
+.header {
+    text-align: center;
+    position: relative;
+}
+
+.header-decoration {
+    width: 60px;
+    height: 2px;
+    background: var(--gradient-gold);
+    margin: 0 auto var(--spacing-md);
+    border-radius: 2px;
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { opacity: 0.6; transform: scaleX(1); }
+    50% { opacity: 1; transform: scaleX(1.2); }
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+}
+
+.title-year {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 900;
+    background: var(--gradient-gold-shimmer);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.15em;
+    text-shadow: 0 0 40px rgba(212, 168, 83, 0.3);
+    animation: glow 4s ease-in-out infinite, shimmer-text 3s ease-in-out infinite;
+    position: relative;
+    filter: drop-shadow(0 0 20px rgba(212, 168, 83, 0.3));
+}
+
+@keyframes glow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 20px rgba(212, 168, 83, 0.3)) drop-shadow(0 0 40px rgba(212, 168, 83, 0.2));
+    }
+    50% { 
+        filter: drop-shadow(0 0 30px rgba(212, 168, 83, 0.5)) drop-shadow(0 0 60px rgba(212, 168, 83, 0.3));
+    }
+}
+
+@keyframes shimmer-text {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.title-text {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--color-text-primary);
+}
+
+.subtitle {
+    font-size: clamp(0.875rem, 2vw, 1.125rem);
+    color: var(--color-text-secondary);
+    letter-spacing: 0.2em;
+    font-weight: 300;
+}
+
+/* 國旗區塊 */
+.flags-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    margin-bottom: var(--spacing-md);
+    animation: flagsFloat 6s ease-in-out infinite;
+}
+
+@keyframes flagsFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.flag-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    transition: var(--transition-normal);
+}
+
+.flag-wrapper:hover {
+    transform: scale(1.05);
+}
+
+.flag-wrapper:hover .flag {
+    box-shadow: 
+        0 0 30px rgba(255, 255, 255, 0.2),
+        0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.flag {
+    width: clamp(80px, 15vw, 140px);
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: var(--transition-normal);
+    overflow: hidden;
+    object-fit: cover;
+    display: block;
+}
+
+.flag-label {
+    font-size: clamp(0.75rem, 1.5vw, 1rem);
+    color: var(--color-text-secondary);
+    letter-spacing: 0.2em;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+/* 國旗連結符號 */
+.flags-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.connector-icon {
+    width: clamp(28px, 5vw, 48px);
+    height: clamp(28px, 5vw, 48px);
+    color: var(--color-accent-gold);
+    animation: heartbeat 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(212, 168, 83, 0.5));
+}
+
+@keyframes heartbeat {
+    0%, 100% { 
+        transform: scale(1); 
+        opacity: 0.8;
+    }
+    15% { 
+        transform: scale(1.15); 
+        opacity: 1;
+    }
+    30% { 
+        transform: scale(1); 
+        opacity: 0.8;
+    }
+    45% { 
+        transform: scale(1.1); 
+        opacity: 1;
+    }
+    60%, 100% { 
+        transform: scale(1); 
+        opacity: 0.8;
+    }
+}
+
+.flags-connector::before,
+.flags-connector::after {
+    content: '';
+    position: absolute;
+    width: clamp(20px, 4vw, 40px);
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-accent-gold), transparent);
+    opacity: 0.5;
+}
+
+.flags-connector::before {
+    right: 100%;
+    margin-right: 8px;
+}
+
+.flags-connector::after {
+    left: 100%;
+    margin-left: 8px;
+    transform: rotate(180deg);
+}
+
+/* 倒數計時區域 */
+.countdown-section {
+    width: 100%;
+    padding: var(--spacing-lg) 0;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(0.5rem, 2vw, 2rem);
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.countdown-value-wrapper {
+    position: relative;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(212, 168, 83, 0.3);
+    border-radius: 16px;
+    padding: clamp(1rem, 3vw, 2rem) clamp(1.5rem, 4vw, 3rem);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.countdown-value-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.6), var(--color-accent-gold), rgba(212, 168, 83, 0.6), transparent);
+    background-size: 200% 100%;
+    animation: gradient-shift 3s ease infinite;
+}
+
+.countdown-value-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212, 168, 83, 0.2), transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.countdown-value-wrapper:hover {
+    border-color: rgba(212, 168, 83, 0.6);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 
+        0 25px 50px -12px rgba(212, 168, 83, 0.3),
+        0 0 40px rgba(212, 168, 83, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.countdown-value-wrapper:hover::after {
+    width: 200%;
+    height: 200%;
+}
+
+.countdown-value {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: 0.05em;
+    min-width: 2.5ch;
+    text-align: center;
+    transition: var(--transition-fast);
+    position: relative;
+    z-index: 1;
+    transform: translateZ(0);
+    will-change: transform, color;
+    backface-visibility: hidden;
+}
+
+.countdown-value.updating {
+    animation: pulse 0.3s ease;
+    will-change: transform, color;
+}
+
+.countdown-value:not(.updating) {
+    will-change: auto;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); color: var(--color-accent-gold); }
+    100% { transform: scale(1); }
+}
+
+.countdown-label {
+    font-size: clamp(0.875rem, 2vw, 1.25rem);
+    color: var(--color-text-secondary);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.countdown-separator {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 6vw, 4rem);
+    color: var(--color-accent-gold);
+    opacity: 0.5;
+    animation: blink 1s infinite;
+    align-self: flex-start;
+    margin-top: clamp(1rem, 3vw, 2rem);
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.2; }
+}
+
+/* 目標日期區域 */
+.target-date {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    width: 100%;
+    max-width: 600px;
+}
+
+.target-date-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.3), transparent);
+}
+
+.target-date-text {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    color: var(--color-text-secondary);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+}
+
+.target-icon {
+    color: var(--color-accent-gold);
+    font-size: 0.5em;
+    animation: targetPulse 2s infinite;
+}
+
+@keyframes targetPulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* 頁尾 */
+.footer {
+    margin-top: var(--spacing-md);
+    text-align: center;
+}
+
+.disclaimer {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .container {
+        padding: var(--spacing-sm);
+        gap: var(--spacing-md);
+    }
+    
+    .flags-container {
+        gap: 1rem;
+    }
+    
+    .flag {
+        width: 70px;
+    }
+    
+    .connector-icon {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .flags-connector::before,
+    .flags-connector::after {
+        width: 15px;
+    }
+    
+    .countdown-container {
+        gap: 0.25rem;
+    }
+    
+    .countdown-separator {
+        display: none;
+    }
+    
+    .countdown-item {
+        flex: 1;
+        min-width: 70px;
+    }
+    
+    .countdown-value-wrapper {
+        width: 100%;
+        padding: var(--spacing-sm);
+    }
+    
+    .target-date {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .target-date-line {
+        width: 60%;
+    }
+}
+
+@media (max-width: 480px) {
+    .title-text {
+        letter-spacing: 0.15em;
+    }
+    
+    .subtitle {
+        letter-spacing: 0.1em;
+    }
+    
+    .countdown-item {
+        min-width: 60px;
+    }
+}
+

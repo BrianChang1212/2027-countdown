@@ -1,0 +1,44 @@
+<!-- 訪客來源分析區塊 -->
+<section class="visitor-analytics-section">
+    <div class="visitor-analytics-header">
+        <div class="visitor-analytics-header-line"></div>
+        <h2 class="visitor-analytics-title">
+            <span class="visitor-analytics-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 3V21H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M7 16L12 11L16 15L21 10" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M21 10V3H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </span>
+            <span data-i18n="analytics.title">訪客來源分析</span>
+        </h2>
+        <div class="visitor-analytics-header-line"></div>
+    </div>
+
+    <div class="analytics-summary">
+        <div class="analytics-summary-item">
+            <span class="summary-label" data-i18n="analytics.totalVisitors">總訪客數</span>
+            <span class="summary-value" id="total-visitors">0</span>
+        </div>
+        <div class="analytics-summary-item">
+            <span class="summary-label" data-i18n="analytics.countries">國家數量</span>
+            <span class="summary-value" id="country-count">0</span>
+        </div>
+    </div>
+
+    <div class="analytics-content">
+        <div class="analytics-chart-container">
+            <canvas id="country-chart"></canvas>
+        </div>
+        <div class="analytics-list-container">
+            <h3 class="analytics-list-title" data-i18n="analytics.topCountries">前 10 名國家</h3>
+            <div class="analytics-list" id="country-list">
+                <p class="no-data" data-i18n="analytics.waitingData">等待訪客數據...</p>
+            </div>
+        </div>
+    </div>
+</section>
+

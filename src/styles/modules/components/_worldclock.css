@@ -1,0 +1,136 @@
+/* ===================================
+   多時區時鐘樣式
+   =================================== */
+
+.worldclock-section {
+    width: 100%;
+    max-width: 900px;
+    margin-top: var(--spacing-md);
+    animation: fadeInUp 1s ease 0.45s forwards;
+    opacity: 0;
+}
+
+.worldclock-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.worldclock-header-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.4), transparent);
+}
+
+.worldclock-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 400;
+    color: var(--color-text-primary);
+    letter-spacing: 0.15em;
+    white-space: nowrap;
+}
+
+.worldclock-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.worldclock-icon svg {
+    width: 28px;
+    height: 28px;
+    color: #6366f1;
+}
+
+.worldclock-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.clock-card {
+    background: linear-gradient(180deg, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0.02) 100%);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+    transition: var(--transition-normal);
+}
+
+.clock-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.clock-flag {
+    margin-bottom: 0.75rem;
+}
+
+.clock-flag img {
+    width: 40px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.clock-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.clock-city {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.clock-time {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #818cf8;
+}
+
+.clock-date {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+}
+
+/* 響應式設計 - 時鐘 */
+@media (max-width: 768px) {
+    .worldclock-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .clock-card {
+        padding: 1rem;
+    }
+    
+    .clock-time {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .worldclock-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    
+    .clock-flag img {
+        width: 32px;
+    }
+    
+    .clock-time {
+        font-size: 1.1rem;
+    }
+}
+

@@ -1,0 +1,177 @@
+/* ===================================
+   工具列樣式
+   =================================== */
+
+.toolbar {
+    position: fixed;
+    top: 20px;
+    left: 300px;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 1001;
+    transition: left var(--transition-normal);
+    pointer-events: none;
+}
+
+.toolbar-btn {
+    pointer-events: auto;
+}
+
+.sidebar.collapsed ~ .toolbar {
+    left: 100px;
+}
+
+.sidebar.mobile ~ .toolbar {
+    left: 20px;
+}
+
+.toolbar-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 14, 23, 0.8);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(212, 168, 83, 0.25);
+    border-radius: 12px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.3);
+}
+
+.toolbar-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(212, 168, 83, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    pointer-events: none;
+}
+
+.toolbar-btn:active::before {
+    width: 300%;
+    height: 300%;
+}
+
+.toolbar-btn:hover {
+    background: rgba(212, 168, 83, 0.15);
+    border-color: var(--color-accent-gold);
+    color: var(--color-accent-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px 0 rgba(212, 168, 83, 0.2);
+}
+
+.toolbar-btn:active {
+    transform: translateY(0) scale(0.95);
+}
+
+.toolbar-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.toolbar-btn .icon-moon,
+.toolbar-btn .icon-compress {
+    display: none;
+}
+
+body.light-theme .toolbar-btn .icon-sun {
+    display: none;
+}
+
+body.light-theme .toolbar-btn .icon-moon {
+    display: block;
+}
+
+body.fullscreen .toolbar-btn .icon-expand {
+    display: none;
+}
+
+body.fullscreen .toolbar-btn .icon-compress {
+    display: block;
+}
+
+/* 手機版側邊欄開關按鈕 */
+.mobile-menu-toggle {
+    display: none;
+}
+
+.mobile-menu-toggle .icon-close {
+    display: none;
+}
+
+/* 手機版顯示開關按鈕 */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .sidebar.mobile.mobile-open ~ .toolbar .mobile-menu-toggle .icon-menu {
+        display: none;
+    }
+    
+    .sidebar.mobile.mobile-open ~ .toolbar .mobile-menu-toggle .icon-close {
+        display: block;
+    }
+    
+    .toolbar {
+        left: 20px;
+        top: 20px;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .toolbar-btn {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+/* 平板版工具列位置調整 */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .toolbar {
+        left: 260px;
+    }
+    
+    .sidebar.collapsed ~ .toolbar {
+        left: 90px;
+    }
+}
+
+/* 小型手機工具列調整 */
+@media (max-width: 480px) {
+    .toolbar {
+        left: 10px;
+        top: 10px;
+        gap: 0.4rem;
+    }
+    
+    .toolbar-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .toolbar-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* 觸控裝置優化 */
+@media (hover: none) and (pointer: coarse) {
+    .toolbar-btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
+

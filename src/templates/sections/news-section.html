@@ -1,0 +1,66 @@
+<!-- 新聞動態牆 -->
+<section class="news-section">
+    <div class="news-header">
+        <div class="news-header-line"></div>
+        <h2 class="news-title">
+            <span class="news-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM14 17H7V15H14V17ZM17 13H7V11H17V13ZM17 9H7V7H17V9Z"
+                        fill="currentColor" />
+                </svg>
+            </span>
+            <span data-i18n="newsTitle">政治新聞動態</span>
+        </h2>
+        <div class="news-header-line"></div>
+    </div>
+
+    <!-- 新聞分類標籤 -->
+    <div class="news-tabs">
+        <button class="news-tab active" data-category="taiwan">
+            <span class="tab-icon">TW</span>
+            <span data-i18n="taiwanNews">台灣新聞</span>
+        </button>
+        <button class="news-tab" data-category="international">
+            <span class="tab-icon">INT</span>
+            <span data-i18n="intlNews">國際新聞</span>
+        </button>
+        <button class="news-tab" data-category="cross-strait">
+            <span class="tab-icon">CN</span>
+            <span data-i18n="crossStraitNews">兩岸關係</span>
+        </button>
+    </div>
+
+    <!-- 新聞內容區 -->
+    <div class="news-container">
+        <div class="news-loading">
+            <div class="loading-spinner"></div>
+            <p data-i18n="loadingNews">正在載入最新新聞...</p>
+        </div>
+        <div class="news-grid" id="news-grid">
+            <!-- 新聞卡片將由 JavaScript 動態生成 -->
+        </div>
+        <div class="news-error" id="news-error" style="display: none;">
+            <span class="error-icon">!</span>
+            <p data-i18n="newsError">無法載入新聞，請稍後再試</p>
+            <button class="retry-btn" onclick="NewsModule.retry()" data-i18n="retryBtn">重新載入</button>
+        </div>
+    </div>
+
+    <!-- 新聞來源說明 -->
+    <div class="news-footer">
+        <p class="news-source-info">
+            <span class="source-dot"></span>
+            <span data-i18n="newsSource">新聞來源：RSS 即時訂閱</span>
+        </p>
+        <button class="refresh-btn" id="refresh-news">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M17.65 6.35C16.2 4.9 14.21 4 12 4C7.58 4 4.01 7.58 4.01 12C4.01 16.42 7.58 20 12 20C15.73 20 18.84 17.45 19.73 14H17.65C16.83 16.33 14.61 18 12 18C8.69 18 6 15.31 6 12C6 8.69 8.69 6 12 6C13.66 6 15.14 6.69 16.22 7.78L13 11H20V4L17.65 6.35Z"
+                    fill="currentColor" />
+            </svg>
+            <span data-i18n="refreshBtn">重新整理</span>
+        </button>
+    </div>
+</section>
+

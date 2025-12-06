@@ -1,0 +1,27 @@
+# 建置輸出
+dist/
+*.min.js
+*.min.css
+
+# 依賴
+node_modules/
+package-lock.json
+
+# 系統檔案
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# 日誌
+*.log
+npm-debug.log*
+
+# 環境變數
+.env
+.env.local

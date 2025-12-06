@@ -1,0 +1,26 @@
+/* ===================================
+   倒數翻頁動畫
+   =================================== */
+
+/* 倒數翻頁動畫優化 */
+.countdown-value.flip {
+    animation: flipNumber 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    will-change: transform, opacity;
+}
+
+@keyframes flipNumber {
+    0% {
+        transform: rotateX(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: rotateX(-90deg);
+        opacity: 0.5;
+    }
+    100% {
+        transform: rotateX(0deg);
+        opacity: 1;
+    }
+}
+

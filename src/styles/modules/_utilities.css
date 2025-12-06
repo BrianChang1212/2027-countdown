@@ -1,0 +1,55 @@
+/* ===================================
+   工具類別和效能優化
+   =================================== */
+
+/* 視差滾動效果 (Parallax Scrolling) */
+.parallax-slow {
+    will-change: transform;
+    transform: translateZ(0);
+    transition: transform 0.3s ease-out;
+}
+
+.parallax-medium {
+    will-change: transform;
+    transform: translateZ(0);
+    transition: transform 0.2s ease-out;
+}
+
+.parallax-fast {
+    will-change: transform;
+    transform: translateZ(0);
+    transition: transform 0.1s ease-out;
+}
+
+/* GPU 加速類別 */
+.gpu-accelerate {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* 平滑滾動容器 */
+.smooth-scroll-container {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 性能優化：減少重排 */
+.optimize-repaint {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* 載入動畫 */
+.container {
+    animation: fadeInUp 1s ease forwards;
+    will-change: transform, opacity;
+}
+
+/* 載入完成後移除 will-change */
+.container.animated {
+    will-change: auto;
+}
+

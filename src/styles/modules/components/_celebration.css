@@ -1,0 +1,117 @@
+/* ===================================
+   慶祝特效樣式
+   =================================== */
+
+/* 煙火容器 */
+.fireworks-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+    overflow: hidden;
+}
+
+.firework {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    animation: firework-explode 1s ease-out forwards;
+}
+
+@keyframes firework-explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+/* 里程碑通知 */
+.milestone-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: linear-gradient(135deg, rgba(212, 168, 83, 0.95) 0%, rgba(184, 148, 63, 0.95) 100%);
+    color: var(--color-bg-primary);
+    padding: 2rem 3rem;
+    border-radius: 20px;
+    text-align: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.5s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 60px rgba(212, 168, 83, 0.3);
+}
+
+.milestone-notification.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.milestone-notification h2 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+}
+
+.milestone-notification p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.milestone-notification .milestone-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: milestone-bounce 0.6s ease infinite;
+}
+
+@keyframes milestone-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* 倒數結束慶祝 */
+.countdown-complete {
+    animation: celebrate-pulse 1s ease-in-out infinite;
+}
+
+@keyframes celebrate-pulse {
+    0%, 100% { 
+        transform: scale(1);
+        filter: drop-shadow(0 0 20px rgba(212, 168, 83, 0.5));
+    }
+    50% { 
+        transform: scale(1.02);
+        filter: drop-shadow(0 0 40px rgba(212, 168, 83, 0.8));
+    }
+}
+
+/* 彩帶效果 */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    z-index: 9997;
+    animation: confetti-fall linear forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+

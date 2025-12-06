@@ -1,0 +1,224 @@
+/* ===================================
+   經濟數據對比樣式
+   =================================== */
+
+.economy-section {
+    width: 100%;
+    max-width: 1000px;
+    margin-top: var(--spacing-md);
+    animation: fadeInUp 1s ease 0.4s forwards;
+    opacity: 0;
+}
+
+.economy-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.economy-header-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.4), transparent);
+}
+
+.economy-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 400;
+    color: var(--color-text-primary);
+    letter-spacing: 0.15em;
+    white-space: nowrap;
+}
+
+.economy-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.economy-icon svg {
+    width: 28px;
+    height: 28px;
+    color: #10b981;
+}
+
+.economy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.economy-card {
+    background: linear-gradient(180deg, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.04) 100%);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 16px;
+    padding: 1.25rem;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.economy-card::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.2), transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.economy-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: rgba(16, 185, 129, 0.5);
+    box-shadow: 
+        0 20px 40px rgba(16, 185, 129, 0.25),
+        0 0 30px rgba(16, 185, 129, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.economy-card:hover::after {
+    width: 200%;
+    height: 200%;
+}
+
+.economy-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.economy-card-header {
+    margin-bottom: 1rem;
+}
+
+.economy-label {
+    font-size: 0.85rem;
+    color: #34d399;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+
+.economy-compare {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.economy-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.eco-flag {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+}
+
+.taiwan-eco .eco-flag {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+}
+
+.china-eco .eco-flag {
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+}
+
+.eco-value {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.eco-unit {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+}
+
+.eco-vs {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    padding: 0.25rem 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.eco-ratio {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    padding: 0.4rem 0.75rem;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.eco-ratio.highlight-tw {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+}
+
+.economy-single {
+    margin-bottom: 0.5rem;
+}
+
+.eco-big-value {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #10b981;
+    display: block;
+}
+
+.eco-note {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-top: 0.5rem;
+}
+
+/* 響應式設計 - 經濟數據 */
+@media (max-width: 768px) {
+    .economy-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .economy-card {
+        padding: 1rem;
+    }
+    
+    .eco-value {
+        font-size: 1rem;
+    }
+    
+    .eco-big-value {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .economy-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

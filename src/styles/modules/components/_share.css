@@ -1,0 +1,168 @@
+/* ===================================
+   社群分享按鈕
+   =================================== */
+
+.share-section {
+    text-align: center;
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+}
+
+.share-text {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+}
+
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.share-btn {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+.share-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+    pointer-events: none;
+}
+
+.share-btn svg {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.share-twitter {
+    background: linear-gradient(135deg, #1da1f2 0%, #0c85d0 100%);
+    color: white;
+}
+
+.share-twitter:hover {
+    background: linear-gradient(135deg, #0c85d0 0%, #0a6ba8 100%);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 24px rgba(29, 161, 242, 0.4);
+}
+
+.share-twitter:hover svg {
+    transform: rotate(5deg);
+}
+
+.share-twitter:hover::before {
+    width: 200%;
+    height: 200%;
+}
+
+.share-facebook {
+    background: linear-gradient(135deg, #1877f2 0%, #0c5dc7 100%);
+    color: white;
+}
+
+.share-facebook:hover {
+    background: linear-gradient(135deg, #0c5dc7 0%, #0a4ca8 100%);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 24px rgba(24, 119, 242, 0.4);
+}
+
+.share-facebook:hover svg {
+    transform: scale(1.1);
+}
+
+.share-facebook:hover::before {
+    width: 200%;
+    height: 200%;
+}
+
+.share-line {
+    background: linear-gradient(135deg, #00b900 0%, #009600 100%);
+    color: white;
+}
+
+.share-line:hover {
+    background: linear-gradient(135deg, #009600 0%, #007a00 100%);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 185, 0, 0.4);
+}
+
+.share-line:hover svg {
+    transform: scale(1.1);
+}
+
+.share-line:hover::before {
+    width: 200%;
+    height: 200%;
+}
+
+.share-copy {
+    background: rgba(212, 168, 83, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--color-accent-gold);
+    border: 1px solid var(--color-accent-gold);
+}
+
+.share-copy:hover {
+    background: linear-gradient(135deg, var(--color-accent-gold) 0%, #b8943f 100%);
+    color: var(--color-bg-primary);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 24px rgba(212, 168, 83, 0.4);
+    border-color: var(--color-accent-gold);
+}
+
+.share-copy:hover svg {
+    transform: rotate(180deg);
+}
+
+.share-copy:hover::before {
+    width: 200%;
+    height: 200%;
+}
+
+.share-copy:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.share-copy.copied {
+    background: #22c55e;
+    border-color: #22c55e;
+    color: white;
+}
+
+/* 響應式設計 - 分享按鈕 */
+@media (max-width: 768px) {
+    .share-btn {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .share-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+

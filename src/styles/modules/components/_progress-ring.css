@@ -1,0 +1,79 @@
+/* ===================================
+   倒數進度環樣式
+   =================================== */
+
+.progress-ring-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto var(--spacing-md);
+}
+
+.progress-ring {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+    fill: none;
+    stroke: rgba(212, 168, 83, 0.1);
+    stroke-width: 8;
+}
+
+.progress-ring-fill {
+    fill: none;
+    stroke: url(#progressGradient);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 565.48;
+    stroke-dashoffset: 565.48;
+    transition: stroke-dashoffset 1s ease;
+    filter: drop-shadow(0 0 8px rgba(212, 168, 83, 0.5));
+}
+
+.progress-ring-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.progress-percent {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.progress-label {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+/* 響應式設計 - 進度環 */
+@media (max-width: 768px) {
+    .progress-ring-container {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .progress-percent {
+        font-size: 1.75rem;
+    }
+    
+    .progress-label {
+        font-size: 0.65rem;
+    }
+}
+

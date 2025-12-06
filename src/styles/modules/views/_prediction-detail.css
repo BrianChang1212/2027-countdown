@@ -1,0 +1,626 @@
+/* ===================================
+   預測市場詳細視圖樣式
+   =================================== */
+
+.prediction-detail-content {
+    padding: var(--spacing-md);
+}
+
+/* 控制面板 */
+.prediction-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.prediction-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    flex: 1;
+}
+
+.prediction-filters .filter-btn {
+    padding: 0.5rem 1rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    font-size: 0.9rem;
+}
+
+.prediction-filters .filter-btn:hover {
+    background: rgba(212, 168, 83, 0.1);
+    border-color: rgba(212, 168, 83, 0.3);
+    color: var(--color-text-primary);
+}
+
+.prediction-filters .filter-btn.active {
+    background: rgba(212, 168, 83, 0.2);
+    border-color: rgba(212, 168, 83, 0.5);
+    color: var(--color-text-primary);
+}
+
+.prediction-sort {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.prediction-sort label {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.sort-select {
+    padding: 0.5rem 1rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.prediction-search {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.search-input {
+    padding: 0.5rem 1rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: var(--color-text-primary);
+    font-size: 0.9rem;
+    min-width: 200px;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: rgba(212, 168, 83, 0.5);
+}
+
+.search-btn {
+    padding: 0.5rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-normal);
+}
+
+.search-btn:hover {
+    background: rgba(212, 168, 83, 0.1);
+    border-color: rgba(212, 168, 83, 0.3);
+}
+
+/* 統計摘要 */
+.prediction-stats-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.prediction-stats-summary .stat-card {
+    background: linear-gradient(135deg, rgba(10, 14, 23, 0.9) 0%, rgba(20, 25, 35, 0.7) 100%);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.prediction-stats-summary .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.prediction-stats-summary .stat-card:hover::before {
+    left: 100%;
+}
+
+.prediction-stats-summary .stat-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-color: rgba(212, 168, 83, 0.5);
+    box-shadow: 0 8px 24px rgba(212, 168, 83, 0.3);
+}
+
+.prediction-stats-summary .stat-icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.prediction-stats-summary .stat-content {
+    flex: 1;
+}
+
+.prediction-stats-summary .stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-accent-gold);
+    margin-bottom: 0.25rem;
+    font-family: var(--font-display, 'Orbitron', sans-serif);
+    letter-spacing: 0.05em;
+    text-shadow: 0 2px 8px rgba(212, 168, 83, 0.3);
+    transition: all var(--transition-normal);
+}
+
+.prediction-stats-summary .stat-card:hover .stat-value {
+    color: rgba(212, 168, 83, 1);
+    text-shadow: 0 4px 12px rgba(212, 168, 83, 0.5);
+}
+
+.prediction-stats-summary .stat-label {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+}
+
+/* 無結果提示 */
+.no-results {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--color-text-secondary);
+}
+
+/* 市場卡片增強樣式 */
+.market-category-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.market-category {
+    padding: 0.25rem 0.75rem;
+    background: rgba(212, 168, 83, 0.15);
+    border: 1px solid rgba(212, 168, 83, 0.3);
+    border-radius: 12px;
+    font-size: 0.75rem;
+    color: var(--color-text-primary);
+    text-transform: capitalize;
+}
+
+.trend-indicator {
+    font-size: 0.9rem;
+    line-height: 1;
+}
+
+.trend-indicator.trend-up {
+    color: #10b981;
+}
+
+.trend-indicator.trend-down {
+    color: #ef4444;
+}
+
+.trend-indicator.trend-stable {
+    color: var(--color-text-secondary);
+}
+
+.market-source {
+    display: flex;
+    align-items: center;
+}
+
+.source-label {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    padding: 0.25rem 0.5rem;
+    background: rgba(139, 92, 246, 0.1);
+    border-radius: 6px;
+}
+
+.market-meta {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--glass-border);
+}
+
+.meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+.meta-row:last-child {
+    margin-bottom: 0;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+
+.meta-item svg {
+    flex-shrink: 0;
+}
+
+.volume-item {
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+.volume-value {
+    color: #8b5cf6;
+}
+
+.update-item {
+    font-size: 0.75rem;
+}
+
+.prediction-markets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.prediction-market-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    -webkit-backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: var(--spacing-md);
+    transition: all var(--transition-normal);
+    opacity: 1;
+    transform: scale(1);
+}
+
+.prediction-market-card.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.prediction-market-card:not(.visible) {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.prediction-market-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212, 168, 83, 0.5);
+    box-shadow: var(--shadow-glow);
+}
+
+.market-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.market-category {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(212, 168, 83, 0.2);
+    border-radius: 12px;
+    color: var(--color-accent-gold);
+    letter-spacing: 0.05em;
+}
+
+.market-volume {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    font-family: var(--font-display);
+}
+
+.market-question {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.5;
+}
+
+.market-stats {
+    margin-bottom: var(--spacing-md);
+}
+
+.market-meta {
+    display: flex;
+    gap: var(--spacing-md);
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.meta-item svg {
+    color: var(--color-accent-gold);
+}
+
+.prediction-filters {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-size: 0.9rem;
+}
+
+.filter-btn:hover {
+    border-color: var(--color-accent-gold);
+    color: var(--color-accent-gold);
+}
+
+.filter-btn.active {
+    background: rgba(212, 168, 83, 0.2);
+    border-color: var(--color-accent-gold);
+    color: var(--color-accent-gold);
+}
+
+/* 圖表區域 */
+.prediction-charts-section {
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, rgba(10, 14, 23, 0.95) 0%, rgba(20, 25, 35, 0.9) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.prediction-charts-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(212, 168, 83, 0.6), 
+        rgba(212, 168, 83, 0.8), 
+        rgba(212, 168, 83, 0.6), 
+        transparent
+    );
+    background-size: 200% 100%;
+    animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.charts-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    letter-spacing: 0.1em;
+    position: relative;
+    padding-bottom: var(--spacing-md);
+}
+
+.charts-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 1), transparent);
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+/* 大螢幕：3 列 */
+@media (min-width: 1600px) {
+    .charts-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .chart-container {
+        min-height: 380px;
+    }
+    
+    .chart-container canvas {
+        max-height: 350px;
+    }
+}
+
+/* 超大螢幕：4 列 */
+@media (min-width: 2000px) {
+    .charts-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.chart-container {
+    background: linear-gradient(135deg, rgba(10, 14, 23, 0.8) 0%, rgba(20, 25, 35, 0.6) 100%);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: var(--spacing-md);
+    position: relative;
+    min-height: 300px;
+    transition: all var(--transition-normal);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.chart-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.6), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.chart-container:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212, 168, 83, 0.4);
+    box-shadow: 0 8px 30px rgba(212, 168, 83, 0.2);
+}
+
+.chart-container:hover::before {
+    opacity: 1;
+}
+
+.chart-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid rgba(212, 168, 83, 0.3);
+    letter-spacing: 0.05em;
+    position: relative;
+}
+
+.chart-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 1), transparent);
+}
+
+.chart-container canvas {
+    max-height: 300px;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* 響應式設計 */
+/* 大螢幕：1 行 4 列（已在上方定義） */
+
+/* 中等及小螢幕：保持 2x2（預設值） */
+@media (max-width: 1599px) {
+    .charts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 平板：2 列 */
+@media (max-width: 1200px) and (min-width: 769px) {
+    .charts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .chart-container {
+        min-height: 320px;
+    }
+}
+
+/* 小螢幕：1 列 */
+@media (max-width: 768px) {
+    .prediction-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .prediction-filters {
+        justify-content: center;
+    }
+
+    .prediction-search {
+        width: 100%;
+    }
+
+    .search-input {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .prediction-markets-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .prediction-stats-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-container {
+        min-height: 280px;
+    }
+    
+    .prediction-charts-section {
+        padding: var(--spacing-md);
+    }
+    
+    .charts-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .prediction-filters {
+        flex-direction: column;
+    }
+    
+    .filter-btn {
+        width: 100%;
+    }
+}
+

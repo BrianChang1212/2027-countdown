@@ -1,0 +1,528 @@
+/* ===================================
+   新聞動態牆樣式
+   =================================== */
+
+.news-section {
+    width: 100%;
+    max-width: 1100px;
+    margin-top: var(--spacing-md);
+    animation: fadeInUp 1s ease 0.3s forwards;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+.news-section.animated {
+    will-change: auto;
+}
+
+/* 新聞標題區 */
+.news-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.news-header-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.4), transparent);
+}
+
+.news-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 400;
+    color: var(--color-text-primary);
+    letter-spacing: 0.15em;
+    white-space: nowrap;
+}
+
+.news-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.news-icon svg {
+    width: 28px;
+    height: 28px;
+    color: var(--color-accent-gold);
+}
+
+/* 新聞分類標籤 */
+.news-tabs {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.news-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    border: 1px solid rgba(212, 168, 83, 0.2);
+    border-radius: 10px;
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.news-tab::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(212, 168, 83, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.news-tab > * {
+    position: relative;
+    z-index: 1;
+}
+
+.news-tab:hover {
+    background: rgba(212, 168, 83, 0.12);
+    border-color: rgba(212, 168, 83, 0.4);
+    color: var(--color-text-primary);
+    transform: translateY(-2px);
+}
+
+.news-tab:hover::before {
+    width: 200%;
+    height: 200%;
+}
+
+.news-tab.active {
+    background: linear-gradient(135deg, rgba(212, 168, 83, 0.2) 0%, rgba(212, 168, 83, 0.1) 100%);
+    border-color: var(--color-accent-gold);
+    color: var(--color-accent-gold);
+    box-shadow: 0 4px 12px 0 rgba(212, 168, 83, 0.2);
+}
+
+.news-tab.active::before {
+    width: 200%;
+    height: 200%;
+}
+
+.tab-icon {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.4rem;
+    background: rgba(212, 168, 83, 0.2);
+    border-radius: 4px;
+    color: var(--color-accent-light);
+}
+
+.news-tab.active .tab-icon {
+    background: var(--color-accent-gold);
+    color: var(--color-bg-primary);
+}
+
+/* 新聞內容區 */
+.news-container {
+    position: relative;
+    min-height: 300px;
+}
+
+/* 載入動畫 */
+.news-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg);
+    color: var(--color-text-secondary);
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(212, 168, 83, 0.1);
+    border-top-color: var(--color-accent-gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 新聞網格 */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--spacing-md);
+}
+
+/* 新聞卡片 */
+.news-card {
+    position: relative;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(212, 168, 83, 0.15);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.news-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-accent-gold), var(--color-accent-light), var(--color-accent-gold));
+    background-size: 200% 100%;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    animation: gradient-shift 3s ease infinite;
+}
+
+.news-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(212, 168, 83, 0.1), transparent 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.news-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    border-color: rgba(212, 168, 83, 0.4);
+    box-shadow: 
+        0 25px 50px -12px rgba(212, 168, 83, 0.2),
+        0 0 40px rgba(212, 168, 83, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.news-card:hover::before {
+    opacity: 1;
+}
+
+.news-card:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.news-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.news-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.news-source {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.7rem;
+    color: var(--color-accent-gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.news-source::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--color-accent-gold);
+    border-radius: 50%;
+    animation: sourcePulse 2s infinite;
+}
+
+@keyframes sourcePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.news-date {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+}
+
+.news-card-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.news-card-description {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.news-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-accent-gold);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: var(--transition-fast);
+}
+
+.news-card-link:hover {
+    color: var(--color-accent-light);
+    gap: 0.75rem;
+}
+
+.news-card-link svg {
+    width: 14px;
+    height: 14px;
+    transition: var(--transition-fast);
+}
+
+.news-card-link:hover svg {
+    transform: translateX(3px);
+}
+
+/* 錯誤狀態 */
+.news-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-lg);
+    text-align: center;
+}
+
+.error-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 2px solid rgba(239, 68, 68, 0.3);
+    border-radius: 50%;
+    color: #ef4444;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.news-error p {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.retry-btn {
+    padding: 0.75rem 1.5rem;
+    background: rgba(212, 168, 83, 0.1);
+    border: 1px solid var(--color-accent-gold);
+    border-radius: 8px;
+    color: var(--color-accent-gold);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.retry-btn:hover {
+    background: var(--color-accent-gold);
+    color: var(--color-bg-primary);
+}
+
+/* 新聞頁尾 */
+.news-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid rgba(212, 168, 83, 0.1);
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.news-source-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+}
+
+.source-dot {
+    width: 6px;
+    height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: dotPulse 2s infinite;
+}
+
+@keyframes dotPulse {
+    0%, 100% { 
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+    }
+    50% { 
+        opacity: 0.8;
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+    }
+}
+
+.refresh-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid rgba(212, 168, 83, 0.2);
+    border-radius: 6px;
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.refresh-btn:hover {
+    border-color: var(--color-accent-gold);
+    color: var(--color-accent-gold);
+}
+
+.refresh-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.refresh-btn:hover svg {
+    animation: spinOnce 0.5s ease;
+}
+
+@keyframes spinOnce {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 新聞卡片標籤 */
+.news-category-tag {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.25rem 0.6rem;
+    background: rgba(212, 168, 83, 0.15);
+    border-radius: 4px;
+    font-size: 0.65rem;
+    color: var(--color-accent-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* 響應式設計 - 新聞區塊 */
+@media (max-width: 768px) {
+    .news-section {
+        margin-top: var(--spacing-sm);
+    }
+    
+    .news-header {
+        gap: var(--spacing-sm);
+    }
+    
+    .news-title {
+        font-size: 1.1rem;
+    }
+    
+    .news-icon svg {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .news-tabs {
+        gap: 0.5rem;
+    }
+    
+    .news-tab {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .tab-icon {
+        font-size: 0.6rem;
+    }
+    
+    .news-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .news-card {
+        padding: 1.25rem;
+    }
+    
+    .news-footer {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .news-tabs {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .news-tab {
+        justify-content: center;
+        width: 100%;
+    }
+}
+

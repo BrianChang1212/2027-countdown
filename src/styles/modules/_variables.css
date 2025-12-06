@@ -1,0 +1,59 @@
+/* ===================================
+   CSS 變數定義
+   =================================== */
+
+:root {
+    /* 主色調 - 深邃夜空藍配金色點綴 */
+    --color-bg-primary: #0a0e17;
+    --color-bg-secondary: #111827;
+    --color-accent-gold: #d4a853;
+    --color-accent-light: #f0d78c;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #94a3b8;
+    --color-text-muted: #64748b;
+    
+    /* 漸層色 */
+    --gradient-gold: linear-gradient(135deg, #d4a853 0%, #f0d78c 50%, #d4a853 100%);
+    --gradient-bg: radial-gradient(ellipse at top, #1a2744 0%, #0a0e17 50%, #050709 100%);
+    --gradient-gold-shimmer: linear-gradient(135deg, #d4a853 0%, #f0d78c 30%, #fff3c4 50%, #f0d78c 70%, #d4a853 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    
+    /* 字體 */
+    --font-display: 'Orbitron', sans-serif;
+    --font-body: 'Noto Sans TC', 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
+    
+    /* 間距 */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+    
+    /* 動畫 */
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* 玻璃態效果變數 */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --glass-backdrop: blur(10px) saturate(180%);
+    
+    /* 陰影層級系統 */
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --shadow-glow: 0 0 20px rgba(212, 168, 83, 0.3), 0 0 40px rgba(212, 168, 83, 0.2);
+    --shadow-glow-strong: 0 0 30px rgba(212, 168, 83, 0.5), 0 0 60px rgba(212, 168, 83, 0.3);
+    
+    /* 光效變數 */
+    --glow-color: rgba(212, 168, 83, 0.6);
+    --glow-radius: 20px;
+    --shimmer-duration: 3s;
+}
+

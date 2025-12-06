@@ -1,0 +1,19 @@
+# 建置輸出
+dist/
+*.min.js
+*.min.css
+
+# 依賴
+node_modules/
+
+# 系統檔案
+.DS_Store
+Thumbs.db
+
+# IDE
+#.vscode/
+.idea/
+
+# 日誌
+*.log
+

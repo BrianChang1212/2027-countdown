@@ -1,0 +1,39 @@
+/* ===================================
+   重置樣式
+   =================================== */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 當有側邊選單時，body 不居中 */
+body:has(.sidebar) {
+    display: block;
+}
+
+/* 當沒有側邊選單時，保持原有的居中樣式（向後兼容） */
+body:not(:has(.sidebar)) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+

@@ -1,0 +1,163 @@
+/* ===================================
+   分治年數計數器樣式
+   =================================== */
+
+.separation-counter-section {
+    width: 100%;
+    max-width: 600px;
+    animation: fadeInUp 1s ease 0.15s forwards;
+    opacity: 0;
+}
+
+.separation-counter-card {
+    background: linear-gradient(180deg, rgba(251, 146, 60, 0.08) 0%, rgba(251, 146, 60, 0.02) 100%);
+    border: 1px solid rgba(251, 146, 60, 0.25);
+    border-radius: 16px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.separation-counter-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #fb923c, #fdba74, #fb923c);
+    opacity: 0.8;
+}
+
+.separation-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.separation-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(251, 146, 60, 0.15);
+    border-radius: 8px;
+}
+
+.separation-icon svg {
+    width: 20px;
+    height: 20px;
+    color: #fb923c;
+}
+
+.separation-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    letter-spacing: 0.1em;
+}
+
+.separation-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.separation-stat {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(251, 146, 60, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(251, 146, 60, 0.1);
+}
+
+.separation-stat-value {
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #fb923c;
+    margin-bottom: 0.25rem;
+    line-height: 1;
+}
+
+.separation-stat-label {
+    font-size: 0.9rem;
+    color: #fdba74;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+}
+
+.separation-stat-desc {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+}
+
+.separation-milestone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(251, 146, 60, 0.1);
+    border-radius: 8px;
+    flex-wrap: wrap;
+}
+
+.milestone-icon {
+    display: flex;
+    align-items: center;
+    color: #fbbf24;
+}
+
+.milestone-text {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.05em;
+}
+
+.milestone-value {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fb923c;
+}
+
+.milestone-countdown {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-left: 0.5rem;
+}
+
+/* 響應式設計 - 分治計數器 */
+@media (max-width: 768px) {
+    .separation-counter-card {
+        padding: 1.25rem;
+    }
+    
+    .separation-stats-grid {
+        gap: 1rem;
+    }
+    
+    .separation-stat {
+        padding: 0.75rem;
+    }
+    
+    .separation-stat-value {
+        font-size: 1.75rem;
+    }
+    
+    .separation-stat-label {
+        font-size: 0.8rem;
+    }
+    
+    .separation-milestone {
+        padding: 0.6rem 0.75rem;
+        font-size: 0.75rem;
+    }
+}
+

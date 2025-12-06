@@ -1,0 +1,52 @@
+/* ===================================
+   主樣式檔案 - 模組化 CSS 匯入
+   此檔案匯入所有模組化的 CSS 檔案
+   =================================== */
+
+/* 核心模組 */
+@import url('modules/_variables.css');
+@import url('modules/_reset.css');
+@import url('modules/_base.css');
+@import url('modules/_utilities.css');
+
+/* 元件模組 */
+@import url('modules/components/_glass.css');
+@import url('modules/components/_buttons.css');
+@import url('modules/components/_debug.css');
+@import url('modules/components/_language.css');
+@import url('modules/components/_sidebar.css');
+@import url('modules/components/_toolbar.css');
+@import url('modules/components/_loader.css');
+@import url('modules/components/_particles.css');
+@import url('modules/components/_ticker.css');
+@import url('modules/components/_celebration.css');
+@import url('modules/components/_share.css');
+@import url('modules/components/_progress-ring.css');
+@import url('modules/components/_progress-bar.css');
+@import url('modules/components/_separation-counter.css');
+@import url('modules/components/_military.css');
+@import url('modules/components/_economy.css');
+@import url('modules/components/_worldclock.css');
+@import url('modules/components/_toast.css');
+
+/* 動畫模組 */
+@import url('modules/animations/_entrance.css');
+@import url('modules/animations/_effects.css');
+
+/* 主題模組 */
+@import url('modules/themes/_fonts.css');
+@import url('modules/themes/_light.css');
+
+/* 佈局模組 */
+@import url('modules/layout/_main-content.css');
+
+/* 視圖模組 */
+@import url('modules/views/_home.css');
+@import url('modules/views/_prediction.css');
+@import url('modules/views/_news.css');
+@import url('modules/views/_stats.css');
+@import url('modules/views/_timeline.css');
+@import url('modules/views/_analytics.css');
+@import url('modules/views/_prediction-detail.css');
+@import url('modules/views/_news-detail.css');
+

@@ -1,0 +1,1305 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="description" content="2027 中國與台灣和平統一倒數計時 - 即時顯示距離目標日期的時間、預測市場數據與兩岸新聞動態">
+    <meta name="keywords" content="2027, 和平統一, 台灣, 中國, 倒數計時, 兩岸關係, 預測市場">
+    <meta name="author" content="2027 Countdown">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://2027countdown.com/">
+    <meta property="og:title" content="2027 和平統一倒數 | Peaceful Reunification Countdown">
+    <meta property="og:description" content="即時倒數計時、預測市場數據、兩岸新聞動態 - 見證歷史的每一刻">
+    <meta property="og:image"
+        content="https://upload.wikimedia.org/wikipedia/commons/7/72/Flag_of_the_Republic_of_China.svg">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:locale:alternate" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="ja_JP">
+    <meta property="og:locale:alternate" content="ko_KR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://2027countdown.com/">
+    <meta name="twitter:title" content="2027 和平統一倒數 | Peaceful Reunification Countdown">
+    <meta name="twitter:description" content="即時倒數計時、預測市場數據、兩岸新聞動態 - 見證歷史的每一刻">
+    <meta name="twitter:image"
+        content="https://upload.wikimedia.org/wikipedia/commons/7/72/Flag_of_the_Republic_of_China.svg">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0a0e17">
+    <meta name="msapplication-TileColor" content="#0a0e17">
+
+    <title>2027 和平統一倒數</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&family=Noto+Sans+SC:wght@300;400;700;900&family=Noto+Sans+JP:wght@300;400;700;900&family=Noto+Sans+KR:wght@300;400;700;900&family=Orbitron:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <!-- 模組化 CSS - 使用主樣式檔案匯入所有模組 -->
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+
+<body>
+    <!-- 頁面切換進度條 -->
+    <div class="page-progress-bar" id="page-progress-bar">
+        <div class="page-progress-fill"></div>
+    </div>
+
+    <!-- 載入動畫 -->
+    <div class="loader-wrapper" id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">2027</div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+            <p class="loader-text">Loading...</p>
+        </div>
+    </div>
+
+    <div class="background-layer"></div>
+    <div class="noise-overlay"></div>
+
+    <!-- 粒子星空背景 -->
+    <canvas id="particles-canvas" class="particles-canvas"></canvas>
+
+    <!-- 側邊選單遮罩 (手機版) -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- 側邊選單 -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo-vertical">
+                <span class="logo-number-top">20</span>
+                <span class="logo-number-bottom">27</span>
+            </div>
+            <div class="sidebar-logo-horizontal">
+                <span class="logo-text">2027</span>
+                <span class="logo-subtitle" data-i18n="sidebar.subtitle">和平統一倒數</span>
+            </div>
+            <button class="sidebar-toggle-btn" id="sidebar-toggle" title="收合選單">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18" />
+                </svg>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#home" class="sidebar-item active" data-route="home">
+                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+                <span class="sidebar-label" data-i18n="sidebar.home">首頁</span>
+            </a>
+
+            <a href="#prediction" class="sidebar-item" data-route="prediction">
+                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3.5 18.5L9.5 12.5L13.5 16.5L22 6.92L20.59 5.51L13.5 13.5L9.5 9.5L2 17L3.5 18.5Z" />
+                </svg>
+                <span class="sidebar-label" data-i18n="sidebar.prediction">預測市場</span>
+            </a>
+
+            <a href="#news" class="sidebar-item" data-route="news">
+                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM14 17H7V15H14V17ZM17 13H7V11H17V13ZM17 9H7V7H17V9Z" />
+                </svg>
+                <span class="sidebar-label" data-i18n="sidebar.news">政治新聞</span>
+            </a>
+
+            <a href="#timeline" class="sidebar-item" data-route="timeline">
+                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                </svg>
+                <span class="sidebar-label" data-i18n="sidebar.timeline">歷史時間軸</span>
+            </a>
+
+            <a href="#stats" class="sidebar-item" data-route="stats">
+                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 20V10M12 20V4M6 20V14" />
+                </svg>
+                <span class="sidebar-label" data-i18n="sidebar.stats">數據統計</span>
+            </a>
+
+            <a href="#analytics" class="sidebar-item" data-route="analytics">
+                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 3V21H21" />
+                    <path d="M7 16L12 11L16 15L21 10" />
+                    <path d="M21 10V3H14" />
+                </svg>
+                <span class="sidebar-label" data-i18n="sidebar.analytics">訪客分析</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- 工具列 (手機版側邊欄開關 + 主題切換 + 全螢幕) -->
+    <div class="toolbar">
+        <button class="toolbar-btn mobile-menu-toggle" id="mobile-sidebar-toggle" title="開啟選單">
+            <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 12h18M3 6h18M3 18h18" />
+            </svg>
+            <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+        </button>
+        <button class="toolbar-btn" id="theme-toggle" title="切換主題">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5" />
+                <path
+                    d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+        </button>
+        <button class="toolbar-btn" id="fullscreen-toggle" title="全螢幕">
+            <svg class="icon-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                    d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+            </svg>
+            <svg class="icon-compress" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7" />
+            </svg>
+        </button>
+    </div>
+
+
+    <!-- 語言切換器（下拉式選單） -->
+    <div class="language-dropdown" id="language-dropdown" style="display: none;">
+        <button class="lang-dropdown-toggle" id="lang-toggle">
+            <span class="current-lang-flag" id="current-lang-flag">繁</span>
+            <span class="current-lang-name" id="current-lang-name">繁體中文</span>
+            <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9l6 6 6-6" />
+            </svg>
+        </button>
+        <div class="lang-dropdown-menu" id="lang-menu">
+            <button class="lang-option active" data-lang="zh-TW">
+                <span class="lang-flag">繁</span>
+                <span class="lang-name">繁體中文</span>
+            </button>
+            <button class="lang-option" data-lang="zh-CN">
+                <span class="lang-flag">简</span>
+                <span class="lang-name">简体中文</span>
+            </button>
+            <button class="lang-option" data-lang="en">
+                <span class="lang-flag">EN</span>
+                <span class="lang-name">English</span>
+            </button>
+            <button class="lang-option" data-lang="ja">
+                <span class="lang-flag">日</span>
+                <span class="lang-name">日本語</span>
+            </button>
+            <button class="lang-option" data-lang="ko">
+                <span class="lang-flag">한</span>
+                <span class="lang-name">한국어</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 主內容區域 -->
+    <main class="main-content">
+        <!-- 首頁視圖 -->
+        <div id="view-home" class="view-container active">
+            <div class="container">
+                <!-- 首頁內容（用於 file:// 協議回退，模板系統會在 HTTP 環境下覆蓋） -->
+                
+<header class="header">
+    <div class="header-decoration"></div>
+
+    <!-- 國旗區塊 -->
+    <div class="flags-container">
+        <!-- 台灣國旗 (中華民國) -->
+        <div class="flag-wrapper">
+            <img class="flag"
+                src="https://upload.wikimedia.org/wikipedia/commons/7/72/Flag_of_the_Republic_of_China.svg"
+                alt="台灣國旗 (中華民國)" loading="lazy">
+            <span class="flag-label" data-i18n="taiwan">台灣</span>
+        </div>
+
+        <!-- 連結符號 -->
+        <div class="flags-connector">
+            <svg class="connector-icon" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M12 21C12 21 4 15 4 9C4 5.5 7 3 10 3C11.5 3 12 4 12 4C12 4 12.5 3 14 3C17 3 20 5.5 20 9C20 15 12 21 12 21Z"
+                    fill="currentColor" opacity="0.8" />
+            </svg>
+        </div>
+
+        <!-- 中國國旗 (五星紅旗) -->
+        <div class="flag-wrapper">
+            <img class="flag"
+                src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg"
+                alt="中國國旗 (五星紅旗)" loading="lazy">
+            <span class="flag-label" data-i18n="china">中國</span>
+        </div>
+    </div>
+
+    <h1 class="title">
+        <span class="title-year">2027</span>
+        <span class="title-text" data-i18n="titleText">和平統一倒數</span>
+    </h1>
+    <p class="subtitle" data-i18n="subtitle">中國與台灣 · 邁向統一的每一刻</p>
+</header>
+
+<section class="countdown-section">
+    <!-- 倒數進度環 -->
+    <div class="progress-ring-container">
+        <svg class="progress-ring" viewBox="0 0 200 200">
+            <defs>
+                <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#d4a853;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#f0d78c;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#d4a853;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <circle class="progress-ring-bg" cx="100" cy="100" r="90" />
+            <circle class="progress-ring-fill" id="progress-ring-fill" cx="100" cy="100" r="90" />
+        </svg>
+        <div class="progress-ring-content">
+            <span class="progress-percent" id="progress-percent">0%</span>
+            <span class="progress-label" data-i18n="progress.elapsed">已經過</span>
+        </div>
+    </div>
+
+    <div class="countdown-container">
+        <div class="countdown-item">
+            <div class="countdown-value-wrapper">
+                <span id="days" class="countdown-value">000</span>
+            </div>
+            <span class="countdown-label" data-i18n="days">天</span>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-item">
+            <div class="countdown-value-wrapper">
+                <span id="hours" class="countdown-value">00</span>
+            </div>
+            <span class="countdown-label" data-i18n="hours">時</span>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-item">
+            <div class="countdown-value-wrapper">
+                <span id="minutes" class="countdown-value">00</span>
+            </div>
+            <span class="countdown-label" data-i18n="minutes">分</span>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-item">
+            <div class="countdown-value-wrapper">
+                <span id="seconds" class="countdown-value">00</span>
+            </div>
+            <span class="countdown-label" data-i18n="seconds">秒</span>
+        </div>
+    </div>
+</section>
+
+<section class="target-date">
+    <div class="target-date-line"></div>
+    <p class="target-date-text">
+        <span class="target-icon">&#9679;</span>
+        <span data-i18n="targetDate">目標日期：2027 年 1 月 1 日</span>
+    </p>
+    <div class="target-date-line"></div>
+</section>
+
+<!-- 分治年數計數器 -->
+<section class="separation-counter-section">
+    <div class="separation-counter-card">
+        <div class="separation-header">
+            <span class="separation-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </span>
+            <h3 class="separation-title" data-i18n="separation.title">兩岸分治紀錄</h3>
+        </div>
+
+        <div class="separation-stats-grid">
+            <div class="separation-stat">
+                <div class="separation-stat-value" id="separation-days">0</div>
+                <div class="separation-stat-label" data-i18n="separation.days">天</div>
+                <div class="separation-stat-desc" data-i18n="separation.sinceDesc">自 1949 年 12 月 7 日
+                </div>
+            </div>
+            <div class="separation-stat">
+                <div class="separation-stat-value" id="separation-years">0</div>
+                <div class="separation-stat-label" data-i18n="separation.years">年</div>
+                <div class="separation-stat-desc" data-i18n="separation.yearsDesc">分治歲月</div>
+            </div>
+        </div>
+
+        <div class="separation-milestone">
+            <span class="milestone-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                    <path
+                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+            </span>
+            <span class="milestone-text" data-i18n="separation.milestone">下一個里程碑：</span>
+            <span class="milestone-value" id="next-milestone">80 年</span>
+            <span class="milestone-countdown" id="milestone-countdown"></span>
+        </div>
+    </div>
+</section>
+
+<!-- Polymarket 預測市場區塊 -->
+<section class="prediction-section">
+    <div class="prediction-header">
+        <div class="prediction-header-line"></div>
+        <h2 class="prediction-title">
+            <span class="prediction-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M3.5 18.5L9.5 12.5L13.5 16.5L22 6.92L20.59 5.51L13.5 13.5L9.5 9.5L2 17L3.5 18.5Z"
+                        fill="currentColor" />
+                </svg>
+            </span>
+            <span data-i18n="predictionTitle">預測市場數據</span>
+        </h2>
+        <div class="prediction-header-line"></div>
+    </div>
+
+    <!-- 預測卡片網格 -->
+    <div class="prediction-grid">
+        <!-- 預測卡片 1: 軍事行動 -->
+        <div class="prediction-card-mini">
+            <div class="prediction-mini-header">
+                <span class="prediction-mini-badge" data-i18n="pred.military">軍事行動</span>
+                <span class="prediction-mini-year">2025</span>
+            </div>
+            <h4 class="prediction-mini-question" data-i18n="pred.q1">中國2025年武力犯台？</h4>
+            <div class="prediction-mini-result">
+                <div class="mini-bar-container">
+                    <div class="mini-bar mini-bar-no" style="width: 91%"></div>
+                </div>
+                <div class="mini-stats">
+                    <span class="mini-no"><span data-i18n="statNo">不會</span> 91%</span>
+                    <span class="mini-yes"><span data-i18n="statYes">會</span> 9%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 預測卡片 2: 封鎖台灣 -->
+        <div class="prediction-card-mini">
+            <div class="prediction-mini-header">
+                <span class="prediction-mini-badge blockade" data-i18n="pred.blockade">海上封鎖</span>
+                <span class="prediction-mini-year">2027</span>
+            </div>
+            <h4 class="prediction-mini-question" data-i18n="pred.q2">2027年前封鎖台灣？</h4>
+            <div class="prediction-mini-result">
+                <div class="mini-bar-container">
+                    <div class="mini-bar mini-bar-no" style="width: 85%"></div>
+                </div>
+                <div class="mini-stats">
+                    <span class="mini-no"><span data-i18n="statNo">不會</span> 85%</span>
+                    <span class="mini-yes"><span data-i18n="statYes">會</span> 15%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 預測卡片 3: 和平統一 -->
+        <div class="prediction-card-mini">
+            <div class="prediction-mini-header">
+                <span class="prediction-mini-badge peace" data-i18n="pred.peace">和平統一</span>
+                <span class="prediction-mini-year">2030</span>
+            </div>
+            <h4 class="prediction-mini-question" data-i18n="pred.q3">2030年前和平統一？</h4>
+            <div class="prediction-mini-result">
+                <div class="mini-bar-container">
+                    <div class="mini-bar mini-bar-no" style="width: 97%"></div>
+                </div>
+                <div class="mini-stats">
+                    <span class="mini-no"><span data-i18n="statNo">不會</span> 97%</span>
+                    <span class="mini-yes"><span data-i18n="statYes">會</span> 3%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 預測卡片 4: 美國介入 -->
+        <div class="prediction-card-mini">
+            <div class="prediction-mini-header">
+                <span class="prediction-mini-badge usa" data-i18n="pred.usIntervene">美國介入</span>
+                <span class="prediction-mini-year">2027</span>
+            </div>
+            <h4 class="prediction-mini-question" data-i18n="pred.q4">台海衝突時美國介入？</h4>
+            <div class="prediction-mini-result">
+                <div class="mini-bar-container">
+                    <div class="mini-bar mini-bar-yes" style="width: 72%"></div>
+                </div>
+                <div class="mini-stats">
+                    <span class="mini-yes highlight"><span data-i18n="statYes">會</span> 72%</span>
+                    <span class="mini-no"><span data-i18n="statNo">不會</span> 28%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="prediction-container">
+        <!-- 主要 Polymarket 卡片 -->
+        <div class="prediction-card polymarket-card">
+            <div class="prediction-card-header">
+                <div class="prediction-source">
+                    <img src="https://polymarket.com/favicon.ico" alt="Polymarket" class="source-logo"
+                        onerror="this.style.display='none'">
+                    <span>Polymarket</span>
+                </div>
+                <span class="prediction-badge" data-i18n="predictionBadge">預測市場</span>
+            </div>
+
+            <h3 class="prediction-question" data-i18n="predictionQuestion">中國是否會在近期對台灣發動軍事行動？</h3>
+
+            <div class="prediction-stats">
+                <div class="stat-item stat-no">
+                    <div class="stat-bar">
+                        <div class="stat-fill" id="polymarket-no" style="width: 91%"></div>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label" data-i18n="statNo">不會</span>
+                        <span class="stat-value" id="polymarket-no-value">~91%</span>
+                    </div>
+                </div>
+                <div class="stat-item stat-yes">
+                    <div class="stat-bar">
+                        <div class="stat-fill" id="polymarket-yes" style="width: 9%"></div>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label" data-i18n="statYes">會</span>
+                        <span class="stat-value" id="polymarket-yes-value">~9%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prediction-meta">
+                <span class="meta-item">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                        <path
+                            d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                    </svg>
+                    <span data-i18n="realTimeData">即時數據</span>
+                </span>
+                <span class="meta-item">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                    </svg>
+                    <span data-i18n="blockchainVerified">區塊鏈驗證</span>
+                </span>
+            </div>
+
+            <a href="https://polymarket.com/markets?_c=geopolitics" target="_blank"
+                rel="noopener noreferrer" class="prediction-link">
+                <span data-i18n="viewMarketData">查看完整市場數據</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path
+                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                </svg>
+            </a>
+        </div>
+
+        <!-- 說明卡片 -->
+        <div class="prediction-card info-card">
+            <h3 class="info-title" data-i18n="infoTitle">什麼是預測市場？</h3>
+            <p class="info-text" data-i18n="infoText">
+                預測市場是一種讓參與者對未來事件結果進行押注的平台。價格反映了市場對該事件發生機率的集體預期。
+            </p>
+            <ul class="info-list">
+                <li>
+                    <span class="info-icon">&#10003;</span>
+                    <span data-i18n="infoItem1">價格 = 市場預測的發生機率</span>
+                </li>
+                <li>
+                    <span class="info-icon">&#10003;</span>
+                    <span data-i18n="infoItem2">去中心化區塊鏈驗證</span>
+                </li>
+                <li>
+                    <span class="info-icon">&#10003;</span>
+                    <span data-i18n="infoItem3">反映全球投資者觀點</span>
+                </li>
+            </ul>
+            <p class="info-disclaimer" data-i18n="infoDisclaimer">
+                ※ 預測市場數據僅供參考，不代表實際發生機率
+            </p>
+            <p class="info-disclaimer region-notice" data-i18n="regionNotice">
+                ⚠️ Polymarket 在部分地區（台灣、中國、美國等）可能無法直接訪問
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- 統計數據卡片 -->
+<section class="stats-section">
+    <div class="stats-header">
+        <div class="stats-header-line"></div>
+        <h2 class="stats-title">
+            <span class="stats-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 20V10M12 20V4M6 20V14" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </span>
+            <span data-i18n="stats.title">兩岸數據概覽</span>
+        </h2>
+        <div class="stats-header-line"></div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                </svg>
+            </div>
+            <div class="stat-card-value" data-count="23">23</div>
+            <div class="stat-card-label" data-i18n="stats.million">百萬人口</div>
+            <div class="stat-card-desc" data-i18n="stats.taiwanPop">台灣人口</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                </svg>
+            </div>
+            <div class="stat-card-value" data-count="1400">1,400</div>
+            <div class="stat-card-label" data-i18n="stats.million">百萬人口</div>
+            <div class="stat-card-desc" data-i18n="stats.chinaPop">中國人口</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z" />
+                </svg>
+            </div>
+            <div class="stat-card-value" data-count="1500">$1,500</div>
+            <div class="stat-card-label" data-i18n="stats.billion">億美元</div>
+            <div class="stat-card-desc" data-i18n="stats.trade">年貿易額</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
+                </svg>
+            </div>
+            <div class="stat-card-value" data-count="130">130</div>
+            <div class="stat-card-label" data-i18n="stats.km">公里</div>
+            <div class="stat-card-desc" data-i18n="stats.distance">海峽最窄處</div>
+        </div>
+    </div>
+</section>
+
+<!-- 兩岸軍力對比 -->
+<section class="military-section">
+    <div class="military-header">
+        <div class="military-header-line"></div>
+        <h2 class="military-title">
+            <span class="military-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </span>
+            <span data-i18n="military.title">兩岸軍力對比</span>
+        </h2>
+        <div class="military-header-line"></div>
+    </div>
+
+    <div class="military-comparison">
+        <div class="military-side taiwan-side">
+            <div class="military-flag">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Flag_of_the_Republic_of_China.svg"
+                    alt="Taiwan" loading="lazy">
+            </div>
+            <h3 class="military-side-title" data-i18n="military.taiwan">台灣</h3>
+        </div>
+
+        <div class="military-bars">
+            <div class="military-bar-item">
+                <span class="bar-label" data-i18n="military.troops">現役兵力</span>
+                <div class="bar-container">
+                    <div class="bar-fill taiwan-bar" style="width: 8%;" data-value="18.8萬"></div>
+                    <div class="bar-fill china-bar" style="width: 92%;" data-value="200萬"></div>
+                </div>
+                <div class="bar-values">
+                    <span class="value-tw">18.8萬</span>
+                    <span class="value-cn">200萬</span>
+                </div>
+            </div>
+
+            <div class="military-bar-item">
+                <span class="bar-label" data-i18n="military.tanks">主戰坦克</span>
+                <div class="bar-container">
+                    <div class="bar-fill taiwan-bar" style="width: 6%;" data-value="800"></div>
+                    <div class="bar-fill china-bar" style="width: 94%;" data-value="5,800"></div>
+                </div>
+                <div class="bar-values">
+                    <span class="value-tw">800</span>
+                    <span class="value-cn">5,800</span>
+                </div>
+            </div>
+
+            <div class="military-bar-item">
+                <span class="bar-label" data-i18n="military.aircraft">戰鬥機</span>
+                <div class="bar-container">
+                    <div class="bar-fill taiwan-bar" style="width: 14%;" data-value="400"></div>
+                    <div class="bar-fill china-bar" style="width: 86%;" data-value="2,500"></div>
+                </div>
+                <div class="bar-values">
+                    <span class="value-tw">400</span>
+                    <span class="value-cn">2,500</span>
+                </div>
+            </div>
+
+            <div class="military-bar-item">
+                <span class="bar-label" data-i18n="military.ships">海軍艦艇</span>
+                <div class="bar-container">
+                    <div class="bar-fill taiwan-bar" style="width: 12%;" data-value="87"></div>
+                    <div class="bar-fill china-bar" style="width: 88%;" data-value="624"></div>
+                </div>
+                <div class="bar-values">
+                    <span class="value-tw">87</span>
+                    <span class="value-cn">624</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="military-side china-side">
+            <div class="military-flag">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg"
+                    alt="China" loading="lazy">
+            </div>
+            <h3 class="military-side-title" data-i18n="military.china">中國</h3>
+        </div>
+    </div>
+
+    <p class="military-disclaimer" data-i18n="military.disclaimer">※ 數據來源：GlobalFirepower 2024，僅供參考</p>
+</section>
+
+<!-- 經濟數據對比 -->
+<section class="economy-section">
+    <div class="economy-header">
+        <div class="economy-header-line"></div>
+        <h2 class="economy-title">
+            <span class="economy-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 2V22M17 5H9.5C8.57174 5 7.6815 5.36875 7.02513 6.02513C6.36875 6.6815 6 7.57174 6 8.5C6 9.42826 6.36875 10.3185 7.02513 10.9749C7.6815 11.6313 8.57174 12 9.5 12H14.5C15.4283 12 16.3185 12.3687 16.9749 13.0251C17.6313 13.6815 18 14.5717 18 15.5C18 16.4283 17.6313 17.3185 16.9749 17.9749C16.3185 18.6313 15.4283 19 14.5 19H6"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </span>
+            <span data-i18n="economy.title">經濟數據對比</span>
+        </h2>
+        <div class="economy-header-line"></div>
+    </div>
+
+    <div class="economy-grid">
+        <div class="economy-card">
+            <div class="economy-card-header">
+                <span class="economy-label" data-i18n="economy.gdp">國內生產總值 (GDP)</span>
+            </div>
+            <div class="economy-compare">
+                <div class="economy-item taiwan-eco">
+                    <span class="eco-flag">TW</span>
+                    <span class="eco-value">$7,900</span>
+                    <span class="eco-unit" data-i18n="economy.billionUSD">億美元</span>
+                </div>
+                <div class="eco-vs">VS</div>
+                <div class="economy-item china-eco">
+                    <span class="eco-flag">CN</span>
+                    <span class="eco-value">$177,000</span>
+                    <span class="eco-unit" data-i18n="economy.billionUSD">億美元</span>
+                </div>
+            </div>
+            <div class="eco-ratio">
+                <span data-i18n="economy.ratio">比例</span>: 1 : 22.4
+            </div>
+        </div>
+
+        <div class="economy-card">
+            <div class="economy-card-header">
+                <span class="economy-label" data-i18n="economy.gdpPerCapita">人均 GDP</span>
+            </div>
+            <div class="economy-compare">
+                <div class="economy-item taiwan-eco">
+                    <span class="eco-flag">TW</span>
+                    <span class="eco-value">$33,775</span>
+                    <span class="eco-unit" data-i18n="economy.usd">美元</span>
+                </div>
+                <div class="eco-vs">VS</div>
+                <div class="economy-item china-eco">
+                    <span class="eco-flag">CN</span>
+                    <span class="eco-value">$12,720</span>
+                    <span class="eco-unit" data-i18n="economy.usd">美元</span>
+                </div>
+            </div>
+            <div class="eco-ratio highlight-tw">
+                <span data-i18n="economy.taiwanHigher">台灣高出</span> 2.65x
+            </div>
+        </div>
+
+        <div class="economy-card">
+            <div class="economy-card-header">
+                <span class="economy-label" data-i18n="economy.tradeVolume">雙邊貿易額</span>
+            </div>
+            <div class="economy-single">
+                <span class="eco-big-value">$1,500</span>
+                <span class="eco-unit" data-i18n="economy.billionUSD">億美元/年</span>
+            </div>
+            <div class="eco-note" data-i18n="economy.tradeNote">中國為台灣最大貿易夥伴</div>
+        </div>
+
+        <div class="economy-card">
+            <div class="economy-card-header">
+                <span class="economy-label" data-i18n="economy.fdi">台商對中投資</span>
+            </div>
+            <div class="economy-single">
+                <span class="eco-big-value">$2,000+</span>
+                <span class="eco-unit" data-i18n="economy.billionUSD">億美元</span>
+            </div>
+            <div class="eco-note" data-i18n="economy.fdiNote">累計投資金額（1991年至今）</div>
+        </div>
+    </div>
+</section>
+
+<!-- 多時區時鐘 -->
+<section class="worldclock-section">
+    <div class="worldclock-header">
+        <div class="worldclock-header-line"></div>
+        <h2 class="worldclock-title">
+            <span class="worldclock-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                    <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" />
+                </svg>
+            </span>
+            <span data-i18n="worldclock.title">全球時區</span>
+        </h2>
+        <div class="worldclock-header-line"></div>
+    </div>
+
+    <div class="worldclock-grid">
+        <div class="clock-card" data-timezone="Asia/Taipei">
+            <div class="clock-flag">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Flag_of_the_Republic_of_China.svg"
+                    alt="Taiwan" loading="lazy">
+            </div>
+            <div class="clock-info">
+                <span class="clock-city" data-i18n="worldclock.taipei">台北</span>
+                <span class="clock-time" id="clock-taipei">--:--:--</span>
+                <span class="clock-date" id="date-taipei">---</span>
+            </div>
+        </div>
+
+        <div class="clock-card" data-timezone="Asia/Shanghai">
+            <div class="clock-flag">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg"
+                    alt="China" loading="lazy">
+            </div>
+            <div class="clock-info">
+                <span class="clock-city" data-i18n="worldclock.beijing">北京</span>
+                <span class="clock-time" id="clock-beijing">--:--:--</span>
+                <span class="clock-date" id="date-beijing">---</span>
+            </div>
+        </div>
+
+        <div class="clock-card" data-timezone="America/New_York">
+            <div class="clock-flag">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg"
+                    alt="USA" loading="lazy">
+            </div>
+            <div class="clock-info">
+                <span class="clock-city" data-i18n="worldclock.washington">華盛頓</span>
+                <span class="clock-time" id="clock-washington">--:--:--</span>
+                <span class="clock-date" id="date-washington">---</span>
+            </div>
+        </div>
+
+        <div class="clock-card" data-timezone="Asia/Tokyo">
+            <div class="clock-flag">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Japan.svg"
+                    alt="Japan" loading="lazy">
+            </div>
+            <div class="clock-info">
+                <span class="clock-city" data-i18n="worldclock.tokyo">東京</span>
+                <span class="clock-time" id="clock-tokyo">--:--:--</span>
+                <span class="clock-date" id="date-tokyo">---</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 歷史時間軸 -->
+<section class="timeline-section">
+    <div class="timeline-header">
+        <div class="timeline-header-line"></div>
+        <h2 class="timeline-title">
+            <span class="timeline-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                    <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" />
+                </svg>
+            </span>
+            <span data-i18n="timeline.title">重要歷史事件</span>
+        </h2>
+        <div class="timeline-header-line"></div>
+    </div>
+
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+
+        <div class="timeline-item" data-expandable>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-header-row">
+                    <span class="timeline-year">1949</span>
+                    <span class="timeline-expand-icon">+</span>
+                </div>
+                <h3 class="timeline-event" data-i18n="timeline.event1949">兩岸分治開始</h3>
+                <p class="timeline-desc" data-i18n="timeline.event1949Desc">國民政府遷台，兩岸進入分治時期</p>
+                <div class="timeline-details">
+                    <p data-i18n="timeline.event1949Detail">
+                        1949年12月7日，中華民國政府從成都遷往台北，標誌著兩岸正式進入長期分治狀態。此後，兩岸在政治、經濟、文化等方面走向不同的發展道路，開啟了長達數十年的分隔歲月。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-expandable>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-header-row">
+                    <span class="timeline-year">1987</span>
+                    <span class="timeline-expand-icon">+</span>
+                </div>
+                <h3 class="timeline-event" data-i18n="timeline.event1987">開放探親</h3>
+                <p class="timeline-desc" data-i18n="timeline.event1987Desc">台灣開放民眾赴大陸探親，破冰之旅</p>
+                <div class="timeline-details">
+                    <p data-i18n="timeline.event1987Detail">
+                        1987年11月2日，台灣政府宣布開放民眾赴中國大陸探親，結束了長達38年的隔離。這是兩岸關係的重大突破，開啟了民間交流的新篇章，數以萬計的老兵得以重返故土與家人團聚。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-expandable>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-header-row">
+                    <span class="timeline-year">1992</span>
+                    <span class="timeline-expand-icon">+</span>
+                </div>
+                <h3 class="timeline-event" data-i18n="timeline.event1992">九二共識</h3>
+                <p class="timeline-desc" data-i18n="timeline.event1992Desc">海基會與海協會達成「九二共識」</p>
+                <div class="timeline-details">
+                    <p data-i18n="timeline.event1992Detail">
+                        1992年，海峽交流基金會與海峽兩岸關係協會在香港會談，就「一個中國」原則達成口頭共識。此共識為後續兩岸協商奠定了政治基礎，但對其內涵的解讀，兩岸至今仍存在不同看法。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-expandable>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-header-row">
+                    <span class="timeline-year">2008</span>
+                    <span class="timeline-expand-icon">+</span>
+                </div>
+                <h3 class="timeline-event" data-i18n="timeline.event2008">三通直航</h3>
+                <p class="timeline-desc" data-i18n="timeline.event2008Desc">兩岸實現直接通郵、通航、通商</p>
+                <div class="timeline-details">
+                    <p data-i18n="timeline.event2008Detail">
+                        2008年12月15日，兩岸正式實現海運直航、空運直航和直接通郵。這項歷史性突破大幅縮短了兩岸的時空距離，從此台北飛上海只需約90分鐘，促進了經貿和人員往來的蓬勃發展。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item" data-expandable>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-header-row">
+                    <span class="timeline-year">2015</span>
+                    <span class="timeline-expand-icon">+</span>
+                </div>
+                <h3 class="timeline-event" data-i18n="timeline.event2015">馬習會</h3>
+                <p class="timeline-desc" data-i18n="timeline.event2015Desc">兩岸領導人66年來首次會面</p>
+                <div class="timeline-details">
+                    <p data-i18n="timeline.event2015Detail">
+                        2015年11月7日，時任中華民國總統馬英九與中華人民共和國國家主席習近平在新加坡舉行歷史性會面。這是1949年以來兩岸最高領導人首次會晤，雙方以「先生」互稱，具有重大象徵意義。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item timeline-future" data-expandable>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="timeline-header-row">
+                    <span class="timeline-year">2027</span>
+                    <span class="timeline-expand-icon">+</span>
+                </div>
+                <h3 class="timeline-event" data-i18n="timeline.event2027">和平統一？</h3>
+                <p class="timeline-desc" data-i18n="timeline.event2027Desc">期待兩岸和平發展的未來</p>
+                <div class="timeline-details">
+                    <p data-i18n="timeline.event2027Detail">
+                        2027年被部分分析人士視為兩岸關係的關鍵節點。無論未來走向如何，和平與對話始終是兩岸人民的共同期盼。期待兩岸能以智慧和善意，共同開創互利共贏的新局面。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="timeline-hint" data-i18n="timeline.clickToExpand">點擊事件卡片展開詳細說明</p>
+</section>
+
+<!-- 新聞動態牆 -->
+<section class="news-section">
+    <div class="news-header">
+        <div class="news-header-line"></div>
+        <h2 class="news-title">
+            <span class="news-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM14 17H7V15H14V17ZM17 13H7V11H17V13ZM17 9H7V7H17V9Z"
+                        fill="currentColor" />
+                </svg>
+            </span>
+            <span data-i18n="newsTitle">政治新聞動態</span>
+        </h2>
+        <div class="news-header-line"></div>
+    </div>
+
+    <!-- 新聞分類標籤 -->
+    <div class="news-tabs">
+        <button class="news-tab active" data-category="taiwan">
+            <span class="tab-icon">TW</span>
+            <span data-i18n="taiwanNews">台灣新聞</span>
+        </button>
+        <button class="news-tab" data-category="international">
+            <span class="tab-icon">INT</span>
+            <span data-i18n="intlNews">國際新聞</span>
+        </button>
+        <button class="news-tab" data-category="cross-strait">
+            <span class="tab-icon">CN</span>
+            <span data-i18n="crossStraitNews">兩岸關係</span>
+        </button>
+    </div>
+
+    <!-- 新聞內容區 -->
+    <div class="news-container">
+        <div class="news-loading">
+            <div class="loading-spinner"></div>
+            <p data-i18n="loadingNews">正在載入最新新聞...</p>
+        </div>
+        <div class="news-grid" id="news-grid">
+            <!-- 新聞卡片將由 JavaScript 動態生成 -->
+        </div>
+        <div class="news-error" id="news-error" style="display: none;">
+            <span class="error-icon">!</span>
+            <p data-i18n="newsError">無法載入新聞，請稍後再試</p>
+            <button class="retry-btn" onclick="NewsModule.retry()" data-i18n="retryBtn">重新載入</button>
+        </div>
+    </div>
+
+    <!-- 新聞來源說明 -->
+    <div class="news-footer">
+        <p class="news-source-info">
+            <span class="source-dot"></span>
+            <span data-i18n="newsSource">新聞來源：RSS 即時訂閱</span>
+        </p>
+        <button class="refresh-btn" id="refresh-news">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M17.65 6.35C16.2 4.9 14.21 4 12 4C7.58 4 4.01 7.58 4.01 12C4.01 16.42 7.58 20 12 20C15.73 20 18.84 17.45 19.73 14H17.65C16.83 16.33 14.61 18 12 18C8.69 18 6 15.31 6 12C6 8.69 8.69 6 12 6C13.66 6 15.14 6.69 16.22 7.78L13 11H20V4L17.65 6.35Z"
+                    fill="currentColor" />
+            </svg>
+            <span data-i18n="refreshBtn">重新整理</span>
+        </button>
+    </div>
+</section>
+
+<!-- 社群分享 -->
+<section class="share-section">
+    <p class="share-text" data-i18n="share.text">分享這個倒數計時</p>
+    <div class="share-buttons">
+        <button class="share-btn share-twitter" id="share-twitter" title="分享到 Twitter">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+        </button>
+        <button class="share-btn share-facebook" id="share-facebook" title="分享到 Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+        </button>
+        <button class="share-btn share-line" id="share-line" title="分享到 LINE">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314" />
+            </svg>
+        </button>
+        <button class="share-btn share-copy" id="share-copy" title="複製連結">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+            </svg>
+        </button>
+    </div>
+</section>
+
+<!-- 訪客統計區塊 -->
+<section class="visitor-stats-section">
+    <div class="visitor-stats-header">
+        <div class="visitor-stats-header-line"></div>
+        <h2 class="visitor-stats-title">
+            <span class="visitor-stats-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </span>
+            <span data-i18n="visitor.title">訪客統計</span>
+        </h2>
+        <div class="visitor-stats-header-line"></div>
+    </div>
+
+    <div class="visitor-counter-cards">
+        <div class="visitor-counter-card">
+            <div class="visitor-counter-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 12S5 4 12 4s11 8 11 8-4 8-11 8S1 12 1 12z" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <div class="visitor-counter-value" id="total-visits">--</div>
+            <div class="visitor-counter-label" data-i18n="visitor.total">總瀏覽數</div>
+        </div>
+
+        <div class="visitor-counter-card">
+            <div class="visitor-counter-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
+            <div class="visitor-counter-value" id="today-visits">0</div>
+            <div class="visitor-counter-label" data-i18n="visitor.today">今日瀏覽</div>
+        </div>
+    </div>
+</section>
+
+<!-- 訪客來源分析區塊 -->
+<section class="visitor-analytics-section">
+    <div class="visitor-analytics-header">
+        <div class="visitor-analytics-header-line"></div>
+        <h2 class="visitor-analytics-title">
+            <span class="visitor-analytics-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 3V21H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M7 16L12 11L16 15L21 10" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M21 10V3H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </span>
+            <span data-i18n="analytics.title">訪客來源分析</span>
+        </h2>
+        <div class="visitor-analytics-header-line"></div>
+    </div>
+
+    <div class="analytics-summary">
+        <div class="analytics-summary-item">
+            <span class="summary-label" data-i18n="analytics.totalVisitors">總訪客數</span>
+            <span class="summary-value" id="total-visitors">0</span>
+        </div>
+        <div class="analytics-summary-item">
+            <span class="summary-label" data-i18n="analytics.countries">國家數量</span>
+            <span class="summary-value" id="country-count">0</span>
+        </div>
+    </div>
+
+    <div class="analytics-content">
+        <div class="analytics-chart-container">
+            <canvas id="country-chart"></canvas>
+        </div>
+        <div class="analytics-list-container">
+            <h3 class="analytics-list-title" data-i18n="analytics.topCountries">前 10 名國家</h3>
+            <div class="analytics-list" id="country-list">
+                <p class="no-data" data-i18n="analytics.waitingData">等待訪客數據...</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <p class="disclaimer" data-i18n="disclaimer">※ 本網站僅為概念展示，2027年為象徵性目標日期</p>
+</footer>
+
+            </div>
+        </div>
+
+        <!-- 預測市場視圖 -->
+        <div id="view-prediction" class="view-container" style="display: none;">
+            <div class="container">
+                <!-- 內容由 JavaScript 動態生成 -->
+            </div>
+        </div>
+
+        <!-- 新聞視圖 -->
+        <div id="view-news" class="view-container" style="display: none;">
+            <div class="container">
+                <!-- 內容由 JavaScript 動態生成 -->
+            </div>
+        </div>
+
+        <!-- 時間軸視圖 -->
+        <div id="view-timeline" class="view-container" style="display: none;">
+            <div class="container">
+                <!-- 暫時顯示首頁的時間軸區塊 -->
+                <section class="timeline-section">
+                    <!-- 時間軸內容將從首頁複製或重新渲染 -->
+                </section>
+            </div>
+        </div>
+
+        <!-- 統計視圖 -->
+        <div id="view-stats" class="view-container" style="display: none;">
+            <div class="container">
+                <!-- 統計內容將由 stats-view.js 動態渲染 -->
+            </div>
+        </div>
+
+        <!-- 訪客分析視圖 -->
+        <div id="view-analytics" class="view-container" style="display: none;">
+            <div class="container">
+                <!-- 內容由 analytics-view.js 動態生成 -->
+            </div>
+        </div>
+    </main>
+
+    <!-- 新聞跑馬燈 (固定於螢幕底部) -->
+    <div class="news-ticker-wrapper">
+        <div class="news-ticker-label">
+            <span class="ticker-live-dot"></span>
+            <span data-i18n="liveNews">即時新聞</span>
+        </div>
+        <div class="news-ticker-container">
+            <div class="news-ticker" id="news-ticker">
+                <span class="ticker-item">正在載入最新新聞...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 核心配置和工具腳本 (必須按順序載入) -->
+    <script src="src/scripts/config/app-config.js" defer></script>
+    <script src="src/scripts/utils/utilities.js" defer></script>
+    <script src="src/scripts/utils/dom-utils.js" defer></script>
+    <script src="src/scripts/utils/logger.js" defer></script>
+    <script src="src/scripts/utils/error-handler.js" defer></script>
+    <script src="src/scripts/utils/timer-manager.js" defer></script>
+    <script src="src/scripts/utils/cache-manager.js" defer></script>
+    <script src="src/scripts/utils/debug.js" defer></script>
+    
+    <!-- 模板系統服務 -->
+    <script src="src/scripts/services/template-loader.js" defer></script>
+    <script src="src/scripts/services/template-initializer.js" defer></script>
+
+    <!-- Chart.js 圖表庫 (外部 CDN，使用 async) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" async></script>
+
+    <!-- 路由和選單系統 -->
+    <script src="src/scripts/router.js" defer></script>
+    <script src="src/scripts/sidebar.js" defer></script>
+
+    <!-- 視圖模組 -->
+    <script src="src/scripts/views/home-view.js" defer></script>
+    <script src="src/scripts/views/prediction-view.js" defer></script>
+    <script src="src/scripts/views/news-view.js" defer></script>
+    <script src="src/scripts/views/timeline-view.js" defer></script>
+    <script src="src/scripts/views/stats-view.js" defer></script>
+    <script src="src/scripts/views/analytics-view.js" defer></script>
+
+    <!-- 數據服務 -->
+    <script src="src/scripts/services/prediction-data-service.js" defer></script>
+    <script src="src/scripts/services/multi-source-data-service.js" defer></script>
+    <!-- 新聞服務模組（拆分後的服務） -->
+    <script src="src/scripts/config/news-sources-config.js" defer></script>
+    <script src="src/scripts/services/rss-parser-service.js" defer></script>
+    <script src="src/scripts/services/news-filter-service.js" defer></script>
+    <script src="src/scripts/utils/news-utils.js" defer></script>
+    <!-- 分析組件模組（拆分後的組件） -->
+    <script src="src/scripts/utils/analytics-utils.js" defer></script>
+    <script src="src/scripts/components/analytics-chart.js" defer></script>
+    <script src="src/scripts/components/analytics-stats.js" defer></script>
+    <!-- 預測市場配置和服務模組（拆分後的模組） -->
+    <script src="src/scripts/config/prediction-markets-config.js" defer></script>
+    <script src="src/scripts/utils/prediction-utils.js" defer></script>
+    <script src="src/scripts/services/prediction-filter-service.js" defer></script>
+    <!-- 預測市場組件模組（拆分後的組件） -->
+    <script src="src/scripts/components/prediction-charts.js" defer></script>
+    <script src="src/scripts/components/prediction-stats.js" defer></script>
+    <script src="src/scripts/components/prediction-market-card.js" defer></script>
+
+    <!-- 功能模組 -->
+    <script src="src/scripts/i18n/embedded-translations.js" defer></script>
+    <script src="src/scripts/language-switcher.js" defer></script>
+    <script src="src/scripts/countdown-timer.js" defer></script>
+    <script src="src/scripts/news-feed.js" defer></script>
+    <script src="src/scripts/prediction-market.js" defer></script>
+
+    <!-- 訪客統計模組 (非關鍵功能，使用 async) -->
+    <script src="src/scripts/visitor-counter.js" async></script>
+    <script src="src/scripts/visitor-analytics.js" async></script>
+
+    <!-- 增強功能 -->
+    <script src="src/scripts/enhancements.js" defer></script>
+
+    <!-- 應用程式入口 -->
+    <script src="src/scripts/main.js" defer></script>
+
+    <!-- 初始化路由系統 (最後載入) -->
+    <script src="src/scripts/init.js" defer></script>
+</body>
+
+</html>

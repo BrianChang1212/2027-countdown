@@ -1,0 +1,53 @@
+<!-- 訪客統計區塊 -->
+<section class="visitor-stats-section">
+    <div class="visitor-stats-header">
+        <div class="visitor-stats-header-line"></div>
+        <h2 class="visitor-stats-title">
+            <span class="visitor-stats-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </span>
+            <span data-i18n="visitor.title">訪客統計</span>
+        </h2>
+        <div class="visitor-stats-header-line"></div>
+    </div>
+
+    <div class="visitor-counter-cards">
+        <div class="visitor-counter-card">
+            <div class="visitor-counter-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 12S5 4 12 4s11 8 11 8-4 8-11 8S1 12 1 12z" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <div class="visitor-counter-value" id="total-visits">--</div>
+            <div class="visitor-counter-label" data-i18n="visitor.total">總瀏覽數</div>
+        </div>
+
+        <div class="visitor-counter-card">
+            <div class="visitor-counter-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
+            <div class="visitor-counter-value" id="today-visits">0</div>
+            <div class="visitor-counter-label" data-i18n="visitor.today">今日瀏覽</div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,45 @@
+<!-- 分治年數計數器 -->
+<section class="separation-counter-section">
+    <div class="separation-counter-card">
+        <div class="separation-header">
+            <span class="separation-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </span>
+            <h3 class="separation-title" data-i18n="separation.title">兩岸分治紀錄</h3>
+        </div>
+
+        <div class="separation-stats-grid">
+            <div class="separation-stat">
+                <div class="separation-stat-value" id="separation-days">0</div>
+                <div class="separation-stat-label" data-i18n="separation.days">天</div>
+                <div class="separation-stat-desc" data-i18n="separation.sinceDesc">自 1949 年 12 月 7 日
+                </div>
+            </div>
+            <div class="separation-stat">
+                <div class="separation-stat-value" id="separation-years">0</div>
+                <div class="separation-stat-label" data-i18n="separation.years">年</div>
+                <div class="separation-stat-desc" data-i18n="separation.yearsDesc">分治歲月</div>
+            </div>
+        </div>
+
+        <div class="separation-milestone">
+            <span class="milestone-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                    <path
+                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+            </span>
+            <span class="milestone-text" data-i18n="separation.milestone">下一個里程碑：</span>
+            <span class="milestone-value" id="next-milestone">80 年</span>
+            <span class="milestone-countdown" id="milestone-countdown"></span>
+        </div>
+    </div>
+</section>
+
