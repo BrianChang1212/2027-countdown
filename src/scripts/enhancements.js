@@ -3,13 +3,17 @@
  * 包含：載入動畫、粒子背景、主題切換、全螢幕、社群分享、翻頁動畫
  */
 
-const EnhancementsModule = (function() {
+const EnhancementsModule = (function () {
     'use strict';
+
+    // 動畫幀 ID（降級方案）
+    let animationId = null;
+    let parallaxAnimationId = null;
 
     // ===================================
     // 載入動畫
     // ===================================
-    
+
     function initLoader() {
         const loader = document.getElementById('loader');
         if (!loader) return;
@@ -19,12 +23,12 @@ const EnhancementsModule = (function() {
             setTimeout(() => {
                 loader.classList.add('hidden');
                 loader.remove();
-                
+
                 // 載入動畫完成後顯示語言選單
                 showLanguageDropdown();
             }, 500);
         }
-        
+
         function showLanguageDropdown() {
             // 使用 I18nModule 的方法顯示
             if (typeof I18nModule !== 'undefined' && I18nModule.showLanguageDropdown) {
@@ -49,7 +53,7 @@ const EnhancementsModule = (function() {
                 setTimeout(hideLoader, 800);
             });
         }
-        
+
         // 安全措施：最多 3 秒後強制隱藏
         setTimeout(() => {
             if (loader && loader.parentNode) {
@@ -61,7 +65,7 @@ const EnhancementsModule = (function() {
     // ===================================
     // 粒子星空背景
     // ===================================
-    
+
     function initParticles() {
         const canvas = document.getElementById('particles-canvas');
         if (!canvas) return;
@@ -119,7 +123,7 @@ const EnhancementsModule = (function() {
 
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
+
             particles.forEach(p => {
                 updateParticle(p);
                 drawParticle(p);
@@ -136,7 +140,7 @@ const EnhancementsModule = (function() {
 
         resize();
         initParticleArray();
-        
+
         // 使用 ResourceManager 啟動動畫
         if (typeof ResourceManager !== 'undefined') {
             ResourceManager.createAnimation('particle-animation', animate);
@@ -149,12 +153,12 @@ const EnhancementsModule = (function() {
             resize();
             initParticleArray();
         };
-        
+
         // 使用防抖優化 resize 事件（250ms）
-        const debouncedResizeHandler = typeof Helpers !== 'undefined' && Helpers.debounce 
+        const debouncedResizeHandler = typeof Helpers !== 'undefined' && Helpers.debounce
             ? Helpers.debounce(resizeHandler, 250)
             : resizeHandler;
-        
+
         if (typeof ResourceManager !== 'undefined') {
             ResourceManager.addEventListener('particle-resize', window, 'resize', debouncedResizeHandler);
         } else {
@@ -177,7 +181,7 @@ const EnhancementsModule = (function() {
                 }
             }
         };
-        
+
         if (typeof ResourceManager !== 'undefined') {
             ResourceManager.addEventListener('particle-visibility', document, 'visibilitychange', visibilityHandler);
         } else {
@@ -188,7 +192,7 @@ const EnhancementsModule = (function() {
     // ===================================
     // 主題切換
     // ===================================
-    
+
     function initThemeToggle() {
         const themeBtn = document.getElementById('theme-toggle');
         if (!themeBtn) return;
@@ -209,7 +213,7 @@ const EnhancementsModule = (function() {
     // ===================================
     // 全螢幕模式
     // ===================================
-    
+
     function initFullscreen() {
         const fullscreenBtn = document.getElementById('fullscreen-toggle');
         if (!fullscreenBtn) return;
@@ -238,7 +242,7 @@ const EnhancementsModule = (function() {
     // ===================================
     // 社群分享
     // ===================================
-    
+
     function initShareButtons() {
         const pageUrl = encodeURIComponent(window.location.href);
         const pageTitle = encodeURIComponent('2027 和平統一倒數');
@@ -297,10 +301,10 @@ const EnhancementsModule = (function() {
     // ===================================
     // 數字計數動畫
     // ===================================
-    
+
     function initCountAnimation() {
         const statValues = document.querySelectorAll('.stat-card-value[data-count]');
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -309,13 +313,13 @@ const EnhancementsModule = (function() {
                     const duration = 2000;
                     const start = 0;
                     const startTime = performance.now();
-                    
+
                     function updateCount(currentTime) {
                         const elapsed = currentTime - startTime;
                         const progress = Math.min(elapsed / duration, 1);
                         const easeProgress = 1 - Math.pow(1 - progress, 3);
                         const current = Math.floor(start + (target - start) * easeProgress);
-                        
+
                         // 格式化數字
                         if (el.textContent.includes('$')) {
                             el.textContent = '$' + current.toLocaleString();
@@ -324,12 +328,12 @@ const EnhancementsModule = (function() {
                         } else {
                             el.textContent = current;
                         }
-                        
+
                         if (progress < 1) {
                             requestAnimationFrame(updateCount);
                         }
                     }
-                    
+
                     requestAnimationFrame(updateCount);
                     observer.unobserve(el);
                 }
@@ -342,11 +346,11 @@ const EnhancementsModule = (function() {
     // ===================================
     // 倒數翻頁動畫增強
     // ===================================
-    
+
     function initFlipAnimation() {
         // 覆寫原有的更新動畫
         const originalUpdateWithAnimation = window.updateWithAnimation;
-        
+
         // 監聽倒數值變化
         const countdownValues = document.querySelectorAll('.countdown-value');
         countdownValues.forEach(el => {
@@ -360,11 +364,11 @@ const EnhancementsModule = (function() {
                     }
                 });
             });
-            
-            observer.observe(el, { 
-                characterData: true, 
+
+            observer.observe(el, {
+                characterData: true,
                 childList: true,
-                subtree: true 
+                subtree: true
             });
         });
     }
@@ -372,10 +376,10 @@ const EnhancementsModule = (function() {
     // ===================================
     // 時間軸滾動動畫
     // ===================================
-    
+
     function initTimelineAnimation() {
         const timelineItems = document.querySelectorAll('.timeline-item');
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -393,7 +397,7 @@ const EnhancementsModule = (function() {
     // ===================================
     // 多時區時鐘
     // ===================================
-    
+
     function initWorldClock() {
         const clocks = {
             taipei: { timeEl: document.getElementById('clock-taipei'), dateEl: document.getElementById('date-taipei'), tz: 'Asia/Taipei' },
@@ -401,15 +405,15 @@ const EnhancementsModule = (function() {
             washington: { timeEl: document.getElementById('clock-washington'), dateEl: document.getElementById('date-washington'), tz: 'America/New_York' },
             tokyo: { timeEl: document.getElementById('clock-tokyo'), dateEl: document.getElementById('date-tokyo'), tz: 'Asia/Tokyo' }
         };
-        
+
         function updateClocks() {
             const now = new Date();
             const lang = typeof I18nModule !== 'undefined' ? I18nModule.getLanguage() : 'zh-TW';
             const locale = lang === 'en' ? 'en-US' : (lang === 'zh-CN' ? 'zh-CN' : 'zh-TW');
-            
+
             Object.values(clocks).forEach(clock => {
                 if (!clock.timeEl) return;
-                
+
                 try {
                     // 格式化時間
                     const timeStr = now.toLocaleTimeString(locale, {
@@ -420,7 +424,7 @@ const EnhancementsModule = (function() {
                         hour12: false
                     });
                     clock.timeEl.textContent = timeStr;
-                    
+
                     // 格式化日期
                     if (clock.dateEl) {
                         const dateStr = now.toLocaleDateString(locale, {
@@ -436,17 +440,17 @@ const EnhancementsModule = (function() {
                 }
             });
         }
-        
+
         // 初始更新
         updateClocks();
-        
+
         // 每秒更新（使用 ResourceManager）
         if (typeof ResourceManager !== 'undefined') {
             ResourceManager.createInterval('world-clock-update', updateClocks, 1000);
         } else {
             setInterval(updateClocks, 1000);
         }
-        
+
         // 監聽語言變更（使用 ResourceManager）
         if (typeof ResourceManager !== 'undefined') {
             ResourceManager.addEventListener('world-clock-language', window, 'languageChanged', updateClocks);
@@ -458,10 +462,10 @@ const EnhancementsModule = (function() {
     // ===================================
     // 軍力對比條動畫
     // ===================================
-    
+
     function initMilitaryBars() {
         const bars = document.querySelectorAll('.bar-fill');
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -482,42 +486,42 @@ const EnhancementsModule = (function() {
     // ===================================
     // 時間軸互動化
     // ===================================
-    
+
     function initTimelineInteraction() {
         const timelineItems = document.querySelectorAll('.timeline-item[data-expandable]');
-        
+
         timelineItems.forEach(item => {
             const content = item.querySelector('.timeline-content');
             if (!content) return;
-            
+
             // 檢查是否已經有事件監聽器（由 TimelineView 添加）
             if (content.dataset.listenerAttached === 'true') return;
-            
+
             content.addEventListener('click', (e) => {
                 // 如果點擊的是圖片，不觸發展開
                 if (e.target.closest('.timeline-image-container')) return;
-                
+
                 // 關閉其他展開的項目
                 timelineItems.forEach(otherItem => {
                     if (otherItem !== item && otherItem.classList.contains('expanded')) {
                         otherItem.classList.remove('expanded');
                     }
                 });
-                
+
                 // 切換當前項目
                 item.classList.toggle('expanded');
-                
+
                 // 如果展開，滾動到可見區域
                 if (item.classList.contains('expanded')) {
                     setTimeout(() => {
-                        item.scrollIntoView({ 
-                            behavior: 'smooth', 
-                            block: 'nearest' 
+                        item.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'nearest'
                         });
                     }, 100);
                 }
             });
-            
+
             content.dataset.listenerAttached = 'true';
         });
     }
@@ -525,41 +529,41 @@ const EnhancementsModule = (function() {
     // ===================================
     // 慶祝特效
     // ===================================
-    
+
     let milestoneShown = {};
-    
+
     function checkMilestones() {
         const TARGET_DATE = new Date('2027-01-01T00:00:00+08:00');
         const now = new Date();
         const diffMs = TARGET_DATE.getTime() - now.getTime();
         const daysRemaining = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-        
+
         // 里程碑檢查點
         const milestones = [365, 100, 50, 30, 7, 1, 0];
-        
+
         milestones.forEach(days => {
             if (daysRemaining === days && !milestoneShown[days]) {
                 milestoneShown[days] = true;
                 showMilestoneNotification(days);
-                
+
                 if (days <= 100) {
                     triggerCelebration();
                 }
-                
+
                 if (days === 0) {
                     triggerFinalCelebration();
                 }
             }
         });
     }
-    
+
     function showMilestoneNotification(days) {
         const notification = document.createElement('div');
         notification.className = 'milestone-notification';
-        
+
         let message = '';
         let icon = '';
-        
+
         if (days === 0) {
             icon = '&#127881;'; // 派對
             message = '目標日期已到達！';
@@ -579,76 +583,76 @@ const EnhancementsModule = (function() {
             icon = '&#128197;'; // 日曆
             message = '倒數一年！';
         }
-        
+
         const notificationHTML = `
             <div class="milestone-icon">${icon}</div>
             <h2>${days === 0 ? '到達！' : days + ' 天'}</h2>
             <p>${message}</p>
         `;
-        
+
         // 使用安全的 HTML 設置
         if (typeof DOMUtils !== 'undefined') {
             DOMUtils.safeSetHTML(notification, notificationHTML);
         } else {
             notification.innerHTML = notificationHTML; // 降級方案
         }
-        
+
         document.body.appendChild(notification);
-        
+
         setTimeout(() => notification.classList.add('show'), 100);
-        
+
         setTimeout(() => {
             notification.classList.remove('show');
             setTimeout(() => notification.remove(), 500);
         }, 4000);
     }
-    
+
     function triggerCelebration() {
         // 創建煙火效果
         const container = document.createElement('div');
         container.className = 'fireworks-container';
         document.body.appendChild(container);
-        
+
         for (let i = 0; i < 50; i++) {
             setTimeout(() => {
                 createFirework(container);
             }, i * 100);
         }
-        
+
         setTimeout(() => container.remove(), 6000);
     }
-    
+
     function createFirework(container) {
         const colors = ['#d4a853', '#f0d78c', '#ef4444', '#22c55e', '#3b82f6', '#8b5cf6'];
         const x = Math.random() * window.innerWidth;
         const y = Math.random() * window.innerHeight * 0.6;
-        
+
         for (let i = 0; i < 20; i++) {
             const particle = document.createElement('div');
             particle.className = 'firework';
             particle.style.left = x + 'px';
             particle.style.top = y + 'px';
             particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            
+
             const angle = (i / 20) * Math.PI * 2;
             const velocity = 50 + Math.random() * 50;
             const dx = Math.cos(angle) * velocity;
             const dy = Math.sin(angle) * velocity;
-            
+
             particle.style.transform = `translate(${dx}px, ${dy}px)`;
             container.appendChild(particle);
-            
+
             setTimeout(() => particle.remove(), 1000);
         }
     }
-    
+
     function triggerFinalCelebration() {
         // 添加慶祝類別
         document.querySelector('.countdown-section')?.classList.add('countdown-complete');
-        
+
         // 創建彩帶效果
         const colors = ['#d4a853', '#f0d78c', '#ef4444', '#22c55e', '#3b82f6', '#8b5cf6', '#ec4899'];
-        
+
         for (let i = 0; i < 100; i++) {
             setTimeout(() => {
                 const confetti = document.createElement('div');
@@ -659,18 +663,18 @@ const EnhancementsModule = (function() {
                 confetti.style.width = (5 + Math.random() * 10) + 'px';
                 confetti.style.height = (5 + Math.random() * 10) + 'px';
                 confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                
+
                 document.body.appendChild(confetti);
-                
+
                 setTimeout(() => confetti.remove(), 5000);
             }, i * 50);
         }
     }
-    
+
     function initMilestoneChecker() {
         // 初始檢查
         checkMilestones();
-        
+
         // 每分鐘檢查一次（使用 ResourceManager）
         if (typeof ResourceManager !== 'undefined') {
             ResourceManager.createInterval('milestone-check', checkMilestones, 60000);
@@ -682,37 +686,37 @@ const EnhancementsModule = (function() {
     // ===================================
     // 滾動觸發動畫系統
     // ===================================
-    
+
     function initScrollAnimations() {
         // 配置選項
         const options = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
-        
+
         // 創建 Intersection Observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
                     // 添加延遲以創建 stagger 效果
-                    const delay = entry.target.dataset.stagger ? 
+                    const delay = entry.target.dataset.stagger ?
                         parseInt(entry.target.dataset.stagger) * 100 : 0;
-                    
+
                     setTimeout(() => {
                         entry.target.classList.add('animated');
-                        
+
                         // 觸發自訂事件
                         entry.target.dispatchEvent(new CustomEvent('animateIn', {
                             detail: { element: entry.target }
                         }));
                     }, delay);
-                    
+
                     // 只觸發一次後取消觀察
                     observer.unobserve(entry.target);
                 }
             });
         }, options);
-        
+
         // 觀察所有需要動畫的元素
         const animatedElements = document.querySelectorAll([
             '.animate-fade-up',
@@ -723,7 +727,7 @@ const EnhancementsModule = (function() {
             '.animate-blur',
             '.animate-on-scroll'
         ].join(','));
-        
+
         animatedElements.forEach((el, index) => {
             // 如果沒有設定 delay，使用索引自動設定
             if (!el.dataset.stagger) {
@@ -732,32 +736,32 @@ const EnhancementsModule = (function() {
             observer.observe(el);
         });
     }
-    
+
     // ===================================
     // 視差滾動效果
     // ===================================
-    
+
     function initParallax() {
         const parallaxElements = document.querySelectorAll('.parallax-slow, .parallax-medium, .parallax-fast');
-        
+
         if (parallaxElements.length === 0) return;
-        
+
         let ticking = false;
-        
+
         function updateParallax() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
+
             parallaxElements.forEach(el => {
                 const speed = el.classList.contains('parallax-slow') ? 0.5 :
-                             el.classList.contains('parallax-fast') ? 0.8 : 0.3;
-                
+                    el.classList.contains('parallax-fast') ? 0.8 : 0.3;
+
                 const yPos = -(scrollTop * speed);
                 el.style.transform = `translate3d(0, ${yPos}px, 0)`;
             });
-            
+
             ticking = false;
         }
-        
+
         function requestTick() {
             if (!ticking) {
                 // 使用 ResourceManager 管理動畫
@@ -770,7 +774,7 @@ const EnhancementsModule = (function() {
                 ticking = true;
             }
         }
-        
+
         // 使用 ResourceManager 管理 scroll 事件
         if (typeof ResourceManager !== 'undefined') {
             ResourceManager.addEventListener('parallax-scroll', window, 'scroll', requestTick, { passive: true });
@@ -779,25 +783,25 @@ const EnhancementsModule = (function() {
         }
         updateParallax(); // 初始執行
     }
-    
+
     // ===================================
     // 平滑滾動增強
     // ===================================
-    
+
     function initSmoothScroll() {
         // 為所有內部連結添加平滑滾動
         const links = document.querySelectorAll('a[href^="#"]');
-        
+
         links.forEach(link => {
             link.addEventListener('click', (e) => {
                 const href = link.getAttribute('href');
                 if (href === '#' || href === '#!') return;
-                
+
                 const target = document.querySelector(href);
                 if (target) {
                     e.preventDefault();
                     const offsetTop = target.offsetTop - 80; // 偏移量
-                    
+
                     window.scrollTo({
                         top: offsetTop,
                         behavior: 'smooth'
@@ -806,11 +810,11 @@ const EnhancementsModule = (function() {
             });
         });
     }
-    
+
     // ===================================
     // 初始化
     // ===================================
-    
+
     function init() {
         initLoader();
         initParticles();
@@ -827,7 +831,7 @@ const EnhancementsModule = (function() {
         initScrollAnimations();
         initParallax();
         initSmoothScroll();
-        
+
         if (typeof Logger !== 'undefined') {
             Logger.info('增強功能模組已啟動', 'EnhancementsModule');
         } else {
@@ -850,7 +854,7 @@ const EnhancementsModule = (function() {
             ResourceManager.cancelAnimation('parallax-scroll');
             ResourceManager.removeEventListener('parallax-scroll');
         }
-        
+
         // 清理動畫幀（降級方案）
         if (animationId) {
             cancelAnimationFrame(animationId);

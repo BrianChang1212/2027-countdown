@@ -3,7 +3,7 @@
  * 提供統一的日誌記錄介面，支援不同日誌級別和生產環境自動禁用
  */
 
-const Logger = (function() {
+const Logger = (function () {
     'use strict';
 
     // 日誌級別
@@ -60,17 +60,17 @@ const Logger = (function() {
                 if (typeof console.debug === 'function') {
                     console.debug(formattedMessage, ...args);
                 } else {
-                    Logger.debug(formattedMessage, ...args);
+                    console.log(formattedMessage, ...args);
                 }
                 break;
             case LogLevel.INFO:
                 console.info(formattedMessage, ...args);
                 break;
             case LogLevel.WARN:
-                Logger.warn(formattedMessage, ...args);
+                console.warn(formattedMessage, ...args);
                 break;
             case LogLevel.ERROR:
-                Logger.error(formattedMessage, ...args);
+                console.error(formattedMessage, ...args);
                 break;
         }
     }
