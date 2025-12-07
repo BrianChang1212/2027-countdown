@@ -1,0 +1,26 @@
+{
+    "name": "2027-countdown-website",
+    "version": "1.0.0",
+    "description": "2027 和平統一倒數網站 - 單頁應用程式",
+    "type": "module",
+    "scripts": {
+        "test": "vitest",
+        "test:ui": "vitest --ui",
+        "test:coverage": "vitest --coverage",
+        "test:watch": "vitest --watch",
+        "dev": "python -m http.server 8000"
+    },
+    "keywords": [
+        "countdown",
+        "spa",
+        "vanilla-js"
+    ],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "@vitest/coverage-v8": "^1.0.0",
+        "@vitest/ui": "^1.0.0",
+        "happy-dom": "^12.10.3",
+        "vitest": "^1.0.0"
+    }
+}

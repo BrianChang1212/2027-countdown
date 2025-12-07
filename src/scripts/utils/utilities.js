@@ -3,7 +3,7 @@
  * 提供各模組共用的輔助函數
  */
 
-const Helpers = (function() {
+const Helpers = (function () {
     'use strict';
 
     /**
@@ -49,6 +49,8 @@ const Helpers = (function() {
     function formatRelativeTime(dateStr, labels = {}, locale = 'zh-TW') {
         try {
             const date = new Date(dateStr);
+            if (isNaN(date.getTime())) return '';
+
             const now = new Date();
             const diffMs = now - date;
             const diffMins = Math.floor(diffMs / 60000);
@@ -143,14 +145,14 @@ const Helpers = (function() {
     }
 
     /**
-     * 檢查是否為有效的 URL
+     * 檢查是否為有效的 URL (僅限 http/https)
      * @param {string} str - 要檢查的字串
      * @returns {boolean} 是否為有效 URL
      */
     function isValidUrl(str) {
         try {
-            new URL(str);
-            return true;
+            const url = new URL(str);
+            return url.protocol === 'http:' || url.protocol === 'https:';
         } catch {
             return false;
         }
@@ -181,7 +183,7 @@ const Helpers = (function() {
      * @returns {*} 屬性值或預設值
      */
     function getNestedProperty(obj, path, defaultValue = undefined) {
-        return path.split('.').reduce((acc, part) => 
+        return path.split('.').reduce((acc, part) =>
             acc && acc[part] !== undefined ? acc[part] : defaultValue, obj);
     }
 
@@ -221,7 +223,7 @@ const Helpers = (function() {
         // 創建 toast 元素
         const toast = document.createElement('div');
         toast.className = `toast toast-${type}`;
-        
+
         // 根據類型設置圖標
         let icon = '';
         switch (type) {

@@ -25,3 +25,11 @@ npm-debug.log*
 # 環境變數
 .env
 .env.local
+
+# 測試
+coverage/
+.vitest/
+*.coverage
+
+# IDE
+.vscode/

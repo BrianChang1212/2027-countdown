@@ -3,7 +3,7 @@
  * 提供統一的錯誤處理、日誌記錄和錯誤恢復機制
  */
 
-const ErrorHandler = (function() {
+const ErrorHandler = (function () {
     'use strict';
 
     // 錯誤類型
@@ -30,6 +30,11 @@ const ErrorHandler = (function() {
      */
     function getErrorType(error) {
         if (!error) return ErrorType.UNKNOWN;
+
+        // 如果錯誤物件已有類型，直接返回
+        if (error.type && Object.values(ErrorType).includes(error.type)) {
+            return error.type;
+        }
 
         // 網路錯誤
         if (error.name === 'TypeError' && error.message.includes('fetch')) {
@@ -68,7 +73,7 @@ const ErrorHandler = (function() {
         const type = getErrorType(error);
         const message = error.message || error.toString() || '未知錯誤';
         const contextStr = context ? `[${context}] ` : '';
-        
+
         return `${contextStr}${type}: ${message}`;
     }
 
@@ -111,7 +116,7 @@ const ErrorHandler = (function() {
      */
     async function handleApiError(response, context = '') {
         let errorMessage = `API 錯誤: ${response.status} ${response.statusText}`;
-        
+
         try {
             const errorData = await response.json();
             if (errorData.message) {
@@ -177,7 +182,7 @@ const ErrorHandler = (function() {
                 return await fn();
             } catch (error) {
                 lastError = error;
-                
+
                 // 如果是最後一次嘗試，記錄錯誤
                 if (attempt === maxRetries) {
                     logError(error, `${context} (重試 ${maxRetries} 次後失敗)`);

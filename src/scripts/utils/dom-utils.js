@@ -3,7 +3,7 @@
  * 提供防止 XSS 攻擊的安全 DOM 操作方法
  */
 
-const DOMUtils = (function() {
+const DOMUtils = (function () {
     'use strict';
 
     // 允許的 HTML 標籤和屬性白名單
@@ -64,14 +64,14 @@ const DOMUtils = (function() {
         html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
         html = html.replace(/on\w+\s*=\s*["'][^"']*["']/gi, '');
         html = html.replace(/on\w+\s*=\s*[^\s>]+/gi, '');
-        
+
         // 移除 javascript: 和 data: URL
         html = html.replace(/javascript:/gi, '');
         html = html.replace(/data:text\/html/gi, '');
 
         // 移除 style 標籤中的危險內容
         html = html.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '');
-        
+
         // 移除 iframe、embed、object 等危險標籤（但保留 input、form 等安全標籤）
         html = html.replace(/<\/?(iframe|embed|object|meta|link|base)[^>]*>/gi, '');
 
@@ -79,16 +79,16 @@ const DOMUtils = (function() {
         try {
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
-            
+
             // 遞迴清理所有節點
             function cleanNode(node) {
                 if (node.nodeType === Node.TEXT_NODE) {
                     return node;
                 }
-                
+
                 if (node.nodeType === Node.ELEMENT_NODE) {
                     const tagName = node.tagName.toLowerCase();
-                    
+
                     // 檢查標籤是否在白名單中
                     if (!ALLOWED_TAGS[tagName]) {
                         // 如果不在白名單中，返回其子節點的文本內容
@@ -105,24 +105,31 @@ const DOMUtils = (function() {
                         });
                         return fragment.childNodes.length > 0 ? fragment : null;
                     }
-                    
+
                     // 創建清理後的元素
                     const cleanElement = document.createElement(tagName);
-                    
+
                     // 只保留白名單中的屬性
                     const allowedAttrs = ALLOWED_TAGS[tagName] || [];
                     Array.from(node.attributes).forEach(attr => {
                         const attrName = attr.name.toLowerCase();
-                        
+
                         // 檢查是否為允許的屬性（允許 data-* 屬性用於數據綁定）
                         if (allowedAttrs.includes(attrName) || attrName === 'data-i18n' || attrName === 'data-i18n-placeholder' || attrName.startsWith('data-')) {
                             let attrValue = attr.value;
-                            
+
                             // 檢查屬性值是否包含危險內容
-                            const isUnsafe = UNSAFE_ATTRIBUTES.some(unsafe => 
+                            let isUnsafe = UNSAFE_ATTRIBUTES.some(unsafe =>
                                 attrValue.toLowerCase().includes(unsafe)
                             );
-                            
+
+                            // 特別檢查 style 屬性
+                            if (!isUnsafe && attrName === 'style') {
+                                if (attrValue.toLowerCase().match(/(javascript:|expression|url\(|alert\()/)) {
+                                    isUnsafe = true;
+                                }
+                            }
+
                             if (!isUnsafe) {
                                 // 對於 href 屬性，只允許 http/https 協議
                                 if (attrName === 'href') {
@@ -144,7 +151,7 @@ const DOMUtils = (function() {
                             }
                         }
                     });
-                    
+
                     // 遞迴清理子節點
                     Array.from(node.childNodes).forEach(child => {
                         const cleaned = cleanNode(child);
@@ -158,13 +165,13 @@ const DOMUtils = (function() {
                             }
                         }
                     });
-                    
+
                     return cleanElement;
                 }
-                
+
                 return null;
             }
-            
+
             // 清理 body 中的所有子節點
             const fragment = document.createDocumentFragment();
             Array.from(doc.body.childNodes).forEach(child => {
@@ -179,19 +186,19 @@ const DOMUtils = (function() {
                     }
                 }
             });
-            
+
             // 將清理後的內容轉換為 HTML 字串
             const container = document.createElement('div');
             container.appendChild(fragment);
             const result = container.innerHTML;
-            
+
             // 調試：如果結果為空但原始 HTML 不為空，記錄警告
             if (!result && html && html.trim().length > 0) {
                 Logger.warn('[DOMUtils] 清理後的 HTML 為空，原始長度:', html.length);
             }
-            
+
             return result;
-            
+
         } catch (error) {
             // 如果解析失敗，記錄錯誤但返回原始 HTML（不進行轉義，避免內容丟失）
             Logger.warn('[DOMUtils] HTML 清理失敗，使用原始 HTML:', error.message);
@@ -210,10 +217,13 @@ const DOMUtils = (function() {
         if (!text || typeof text !== 'string') {
             return '';
         }
-        
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
+
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
     }
 
     /**
@@ -230,7 +240,7 @@ const DOMUtils = (function() {
         }
 
         const { sanitize = true } = options;
-        
+
         if (sanitize) {
             element.innerHTML = sanitizeHTML(html);
         } else {
@@ -238,7 +248,7 @@ const DOMUtils = (function() {
             let cleaned = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
             cleaned = cleaned.replace(/on\w+\s*=\s*["'][^"']*["']/gi, '');
             element.innerHTML = cleaned;
-            
+
             // 調試：如果設置後為空但原始不為空，記錄警告
             if (!element.innerHTML && html && html.trim().length > 0) {
                 Logger.warn('[DOMUtils] 寬鬆清理後 HTML 為空！原始長度:', html.length);
@@ -257,7 +267,7 @@ const DOMUtils = (function() {
      */
     function safeCreateElement(tag, attrs = {}, content = null) {
         const element = document.createElement(tag);
-        
+
         // 設置屬性
         Object.entries(attrs).forEach(([key, value]) => {
             if (key === 'class') {
@@ -266,10 +276,10 @@ const DOMUtils = (function() {
                 Object.assign(element.style, value);
             } else if (key.startsWith('data-') || ALLOWED_TAGS[tag]?.includes(key) || key === 'id') {
                 // 檢查是否為危險屬性
-                const isUnsafe = UNSAFE_ATTRIBUTES.some(unsafe => 
+                const isUnsafe = UNSAFE_ATTRIBUTES.some(unsafe =>
                     String(value).toLowerCase().includes(unsafe)
                 );
-                
+
                 if (!isUnsafe) {
                     if (key === 'href' && !value.match(/^(https?:\/\/|#|\/|mailto:)/i)) {
                         Logger.warn('[DOMUtils] 不安全的 href:', value);
@@ -279,7 +289,7 @@ const DOMUtils = (function() {
                 }
             }
         });
-        
+
         // 設置內容
         if (content !== null) {
             if (typeof content === 'string') {
@@ -299,7 +309,7 @@ const DOMUtils = (function() {
                 });
             }
         }
-        
+
         return element;
     }
 
@@ -325,11 +335,11 @@ const DOMUtils = (function() {
         const fragment = document.createDocumentFragment();
         const container = document.createElement('div');
         safeSetHTML(container, html);
-        
+
         while (container.firstChild) {
             fragment.appendChild(container.firstChild);
         }
-        
+
         return fragment;
     }
 
@@ -353,4 +363,3 @@ if (typeof window !== 'undefined') {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = DOMUtils;
 }
-
